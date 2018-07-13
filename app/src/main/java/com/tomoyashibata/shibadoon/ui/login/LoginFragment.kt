@@ -7,6 +7,8 @@ import android.support.customtabs.CustomTabsIntent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.widget.toast
 import com.tomoyashibata.shibadoon.databinding.FragmentLoginBinding
 import com.tomoyashibata.shibadoon.model.data.Authentication
 import com.tomoyashibata.shibadoon.ui.BaseFragment
@@ -18,6 +20,7 @@ class LoginFragment : BaseFragment() {
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     val binding = FragmentLoginBinding.inflate(inflater, container, false)
     binding.viewModel = this.viewModel
+    binding.setLifecycleOwner(this)
     return binding.root
   }
 
@@ -31,6 +34,7 @@ class LoginFragment : BaseFragment() {
   }
 
   override fun subscribeToNavigationChanges() {
+    this.viewModel.instanceBlankErrorEvent.observe(this, Observer { this.showToast("正しいインスタンス名を入力してください") })
     this.viewModel.onRegisterAppEvent.observe(this, Observer { it?.let { this.hoge(it) } })
   }
 
@@ -39,6 +43,10 @@ class LoginFragment : BaseFragment() {
     val customTabs = CustomTabsIntent.Builder().build()
     customTabs.intent.data = Uri.parse(url)
     this.startActivityForResult(customTabs.intent, 100)
+  }
+
+  private fun showToast(message: String) {
+    this.requireContext().toast(message, Toast.LENGTH_LONG)
   }
 
   override fun onResume() {

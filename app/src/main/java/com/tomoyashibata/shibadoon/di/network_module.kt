@@ -9,13 +9,13 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 val networkModule = module {
-  single {
+  single { (instance: String) ->
     val moshi = Moshi.Builder()
       .add(KotlinJsonAdapterFactory())
       .build()
 
     Retrofit.Builder()
-      .baseUrl("https://m6n.onsen.tech/")
+      .baseUrl("https://${instance}/")
       .addCallAdapterFactory(CoroutineCallAdapterFactory())
       .addConverterFactory(MoshiConverterFactory.create(moshi))
       .build()
