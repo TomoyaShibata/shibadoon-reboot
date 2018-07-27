@@ -6,6 +6,6 @@ import org.koin.android.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
 
 val shibadoonModule = module {
-  viewModel { HomeViewModel() }
+  viewModel { HomeViewModel(get()) }
   viewModel { LoginViewModel(get(), get()) }
 }

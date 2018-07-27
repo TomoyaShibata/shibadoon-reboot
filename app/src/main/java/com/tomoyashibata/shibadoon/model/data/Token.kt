@@ -1,10 +1,14 @@
 package com.tomoyashibata.shibadoon.model.data
 
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
+@Entity
 @JsonClass(generateAdapter = true)
 data class Token(
+  @PrimaryKey
   @Json(name = "access_token")
   val accessToken: String,
   @Json(name = "token_type")

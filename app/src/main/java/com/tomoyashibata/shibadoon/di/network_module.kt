@@ -9,15 +9,16 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 val networkModule = module {
-  single { (instance: String) ->
-    val moshi = Moshi.Builder()
+  single {
+    Moshi.Builder()
       .add(KotlinJsonAdapterFactory())
       .build()
-
+  }
+  factory { (instance: String) ->
     Retrofit.Builder()
-      .baseUrl("https://${instance}/")
+      .baseUrl("https://$instance/")
       .addCallAdapterFactory(CoroutineCallAdapterFactory())
-      .addConverterFactory(MoshiConverterFactory.create(moshi))
+      .addConverterFactory(MoshiConverterFactory.create(get()))
       .build()
       .create(MastodonApi::class.java)
   }

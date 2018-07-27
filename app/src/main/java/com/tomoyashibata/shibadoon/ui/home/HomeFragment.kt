@@ -34,7 +34,6 @@ class HomeFragment : BaseFragment() {
   }
 
   private fun setupActionBar() {
-    val activity = activity as AppCompatActivity?
-    activity?.setSupportActionBar(this.toolbar)
+    (activity as AppCompatActivity).setSupportActionBar(this.toolbar)
   }
 }

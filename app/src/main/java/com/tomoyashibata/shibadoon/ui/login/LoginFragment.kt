@@ -13,6 +13,7 @@ import com.tomoyashibata.shibadoon.databinding.FragmentLoginBinding
 import com.tomoyashibata.shibadoon.model.data.Authentication
 import com.tomoyashibata.shibadoon.ui.BaseFragment
 import org.koin.android.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class LoginFragment : BaseFragment() {
   private val viewModel: LoginViewModel by viewModel()
@@ -39,7 +40,8 @@ class LoginFragment : BaseFragment() {
   }
 
   fun hoge(authentication: Authentication) {
-    val url = "https://m6n.onsen.tech/oauth/authorize?client_id=${authentication.clientId}&redirect_uri=${authentication.redirectUri}&response_type=code&scope=read+write+follow"
+    Timber.i(authentication.toString())
+    val url = "https://${this.viewModel.instance.value}/oauth/authorize?client_id=${authentication.clientId}&redirect_uri=${authentication.redirectUri}&response_type=code&scope=read+write+follow"
     val customTabs = CustomTabsIntent.Builder().build()
     customTabs.intent.data = Uri.parse(url)
     this.startActivityForResult(customTabs.intent, 100)

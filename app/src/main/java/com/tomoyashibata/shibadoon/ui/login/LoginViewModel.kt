@@ -27,19 +27,17 @@ class LoginViewModel(
     ui {
       this@LoginViewModel.authentication = async { this@LoginViewModel.instance.value?.let { this@LoginViewModel.loginUseCase.execute(it) } }.await()
       this@LoginViewModel.onRegisterAppEvent.apply {
-        value = authentication
+        value = this@LoginViewModel.authentication
         call()
       }
     }
   }
 
   fun onSuccessGetCode(code: String) {
-    if (this.authentication == null) {
-      return
-    }
-
     async {
-      authentication?.let { this@LoginViewModel.getTokenUseCase.execute(it, code) }
+      this@LoginViewModel.authentication?.let {
+        this@LoginViewModel.getTokenUseCase.execute(this@LoginViewModel.instance.value!!, it, code)
+      }
     }
   }
 }

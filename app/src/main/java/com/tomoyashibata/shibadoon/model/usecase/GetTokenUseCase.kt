@@ -9,7 +9,7 @@ import kotlin.coroutines.experimental.suspendCoroutine
 class GetTokenUseCase(
   private val tokenRepository: TokenRepository
 ) {
-  suspend fun execute(authentication: Authentication, code: String) = suspendCoroutine<Unit> { cont ->
+  suspend fun execute(instance: String, authentication: Authentication, code: String) = suspendCoroutine<Unit> { cont ->
     val requestToken = RequestToken(
       clientId = authentication.clientId,
       clientSecret = authentication.clientSecret,
@@ -18,7 +18,8 @@ class GetTokenUseCase(
 
     launch(cont.context) {
       try {
-        this@GetTokenUseCase.tokenRepository.getToken(requestToken)
+        val token = this@GetTokenUseCase.tokenRepository.getToken(instance, requestToken)
+        token?.let { this@GetTokenUseCase.tokenRepository.saveToken(it) }
         cont.resume(Unit)
       } catch (e: Exception) {
         cont.resumeWithException(e)
