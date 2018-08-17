@@ -1,6 +1,8 @@
 package com.tomoyashibata.shibadoon
 
 import android.app.Application
+import co.zsmb.materialdrawerkt.imageloader.drawerImageLoader
+import com.bumptech.glide.Glide
 import com.tomoyashibata.shibadoon.di.*
 import org.koin.android.ext.android.startKoin
 import timber.log.Timber
@@ -9,16 +11,33 @@ import timber.log.Timber.DebugTree
 class ShibadoonApplication : Application() {
   override fun onCreate() {
     super.onCreate()
+
+    this.setupTimber()
+    this.setupKoin()
+    this.setupMaterialDrawer()
+  }
+
+  private fun setupTimber() {
+    if (BuildConfig.DEBUG) {
+      Timber.plant(DebugTree())
+    }
+  }
+
+  private fun setupKoin() {
     startKoin(this, listOf(
       shibadoonModule,
+      sharedPreferenceModule,
       databaseModule,
       networkModule,
       repositoryModule,
       useCaseModule
     ))
+  }
 
-    if (BuildConfig.DEBUG) {
-      Timber.plant(DebugTree())
+  private fun setupMaterialDrawer() {
+    drawerImageLoader {
+      set { imageView, uri, _, _ -> Glide.with(imageView.context).load(uri).into(imageView) }
+      cancel { Glide.with(it.context).clear(it) }
     }
   }
 }

@@ -2,29 +2,51 @@ package com.tomoyashibata.shibadoon.ui.home
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import com.tomoyashibata.shibadoon.model.data.Account
+import com.tomoyashibata.shibadoon.model.usecase.ChangeCurrentSavedAccountUseCase
+import com.tomoyashibata.shibadoon.model.usecase.GetCurrentSavedAccountUseCase
+import com.tomoyashibata.shibadoon.model.usecase.GetSavedAccountsUseCase
 import com.tomoyashibata.shibadoon.model.usecase.HasSavedTokenUseCase
 import com.tomoyashibata.shibadoon.ui.SingleLiveEvent
 import com.tomoyashibata.shibadoon.ui.async
 import com.tomoyashibata.shibadoon.ui.ui
-import timber.log.Timber
 
 class HomeViewModel(
+  private val changeCurrentSavedAccountUseCase: ChangeCurrentSavedAccountUseCase,
+  private val getCurrentSavedAccountUseCase: GetCurrentSavedAccountUseCase,
+  private val getSavedAccountsUseCase: GetSavedAccountsUseCase,
   private val hasSavedTokenUseCase: HasSavedTokenUseCase
 ) : ViewModel() {
-  val huga: MutableLiveData<String> = MutableLiveData()
-  val onRequestLoginEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
+  val onRequestNavigateToLoginFragmentEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
+  var currentSavedAccount: MutableLiveData<Account> = MutableLiveData()
+  val savedAccounts: MutableLiveData<List<Pair<Long, Account>>> = MutableLiveData()
 
   init {
-    this@HomeViewModel.onRequestLoginEvent.call()
+    ui {
+      val hasSavedToken = async { this@HomeViewModel.hasSavedTokenUseCase.execute() }.await()
+      if (!hasSavedToken) {
+        this@HomeViewModel.onRequestNavigateToLoginFragmentEvent.call()
+        return@ui
+      }
 
-//    ui {
-//      val hasSavedToken = async { this@HomeViewModel.hasSavedTokenUseCase.execute() }.await()
-//      if (!hasSavedToken) {
-//        this@HomeViewModel.onRequestLoginEvent.call()
-//      } else {
-//        Timber.i("あるよ")
-//        this@HomeViewModel.huga.value = "ふがwww"
-//      }
-//    }
+      this@HomeViewModel.getAccounts()
+    }
+  }
+
+  val postGetAccountsEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
+  private fun getAccounts() {
+    ui {
+      this@HomeViewModel.currentSavedAccount.value = async { this@HomeViewModel.getCurrentSavedAccountUseCase.execute() }.await()
+      this@HomeViewModel.savedAccounts.value = async { this@HomeViewModel.getSavedAccountsUseCase.execute() }.await()
+      this@HomeViewModel.postGetAccountsEvent.call()
+    }
+  }
+
+  val postChangeAccountEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
+  fun changeCurrentSaved(accessTokenId: Long) {
+    ui {
+      async { this@HomeViewModel.changeCurrentSavedAccountUseCase.execute(accessTokenId) }.await()
+      this@HomeViewModel.postChangeAccountEvent.call()
+    }
   }
 }

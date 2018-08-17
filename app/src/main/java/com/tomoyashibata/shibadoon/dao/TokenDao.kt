@@ -4,16 +4,16 @@ import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
 import android.arch.persistence.room.Update
-import com.tomoyashibata.shibadoon.model.data.Token
+import com.tomoyashibata.shibadoon.model.data.AccessToken
 
 @Dao
 interface TokenDao {
-  @Query("SELECT * FROM Token")
-  fun getAll(): List<Token>
+  @Query("SELECT * FROM AccessToken")
+  fun getAll(): List<AccessToken>
 
   @Insert
-  fun insert(token: Token)
+  fun insert(accessToken: AccessToken)
 
   @Update
-  fun update(token: Token)
+  fun update(token: AccessToken)
 }

@@ -3,20 +3,35 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/nav_graph.xml"
-            app:startDestination="@id/loginFragment">
+            app:startDestination="@id/mainFragment">
 
   <fragment
     android:id="@+id/mainFragment"
     android:name="com.tomoyashibata.shibadoon.ui.home.HomeFragment"
     android:label="fragment_main"
-    tools:layout="@layout/fragment_home" >
+    tools:layout="@layout/fragment_home">
     <action
       android:id="@+id/action_mainFragment_to_loginFragment"
-      app:destination="@id/loginFragment" />
+      app:destination="@id/login_fragment"
+      app:enterAnim="?android:fragmentOpenEnterAnimation"
+      app:exitAnim="?android:fragmentOpenEnterAnimation"
+      app:popEnterAnim="?android:fragmentOpenEnterAnimation"
+      app:popExitAnim="?android:fragmentOpenEnterAnimation" />
+    <action
+      android:id="@+id/action_mainFragment_self"
+      app:destination="@id/mainFragment" />
   </fragment>
   <fragment
-    android:id="@+id/loginFragment"
+    android:id="@+id/login_fragment"
     android:name="com.tomoyashibata.shibadoon.ui.login.LoginFragment"
     android:label="fragment_login"
-    tools:layout="@layout/fragment_login" />
+    tools:layout="@layout/fragment_login">
+    <action
+      android:id="@+id/action_loginFragment_to_mainFragment"
+      app:destination="@id/mainFragment"
+      app:enterAnim="?android:fragmentOpenEnterAnimation"
+      app:exitAnim="?android:fragmentOpenEnterAnimation"
+      app:popEnterAnim="?android:fragmentOpenEnterAnimation"
+      app:popExitAnim="?android:fragmentOpenEnterAnimation" />
+  </fragment>
 </navigation>

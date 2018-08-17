@@ -7,7 +7,7 @@ import com.squareup.moshi.JsonClass
 
 @Entity
 @JsonClass(generateAdapter = true)
-data class Token(
+data class AccessToken(
   @PrimaryKey
   @Json(name = "access_token")
   val accessToken: String,

@@ -1,11 +1,11 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 1,
-    "identityHash": "fb7e2c916f8e34aec4341fc59999a8b0",
+    "version": 5,
+    "identityHash": "d13f39d4c2e455910748742ac36e23e8",
     "entities": [
       {
-        "tableName": "SavedAccount",
+        "tableName": "SavedAccessToken",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `accessToken` TEXT NOT NULL, `instance` TEXT NOT NULL)",
         "fields": [
           {
@@ -37,7 +37,7 @@
         "foreignKeys": []
       },
       {
-        "tableName": "Token",
+        "tableName": "AccessToken",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`accessToken` TEXT NOT NULL, `tokenType` TEXT NOT NULL, `scope` TEXT NOT NULL, `createdAt` TEXT NOT NULL, PRIMARY KEY(`accessToken`))",
         "fields": [
           {
@@ -73,55 +73,11 @@
         },
         "indices": [],
         "foreignKeys": []
-      },
-      {
-        "tableName": "ValidAccountToken",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `instance` TEXT NOT NULL, `accountId` TEXT NOT NULL, `accessToken` TEXT NOT NULL, `isCurrent` INTEGER NOT NULL)",
-        "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "instance",
-            "columnName": "instance",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "accountId",
-            "columnName": "accountId",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "accessToken",
-            "columnName": "accessToken",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "isCurrent",
-            "columnName": "isCurrent",
-            "affinity": "INTEGER",
-            "notNull": true
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "id"
-          ],
-          "autoGenerate": true
-        },
-        "indices": [],
-        "foreignKeys": []
       }
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"fb7e2c916f8e34aec4341fc59999a8b0\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"d13f39d4c2e455910748742ac36e23e8\")"
     ]
   }
 }

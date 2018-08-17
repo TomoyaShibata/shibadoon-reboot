@@ -2,17 +2,14 @@ package com.tomoyashibata.shibadoon.model.repository
 
 import com.tomoyashibata.shibadoon.model.data.Account
 import com.tomoyashibata.shibadoon.model.network.MastodonApi
+import org.koin.core.parameter.ParameterList
+import org.koin.standalone.KoinComponent
+import org.koin.standalone.inject
 
-class AccountRepository(
-  private val mastodonApi: MastodonApi
-) {
-  fun fetchAccount(id: String): Account {
-    return this.mastodonApi.fetchAccount(id).execute().body()
-      ?: throw Exception("")
-  }
-
-  fun getCurrentUser(): Account {
-    return mastodonApi.getCurrentUser().execute().body()
-      ?: throw Exception("")
+class AccountRepository : KoinComponent {
+  fun getCurrentAccount(instance: String, accessToken: String): Account {
+    val service: MastodonApi by inject { ParameterList(instance, accessToken) }
+    val result = service.getCurrentAccount().execute()
+    return result.body() ?: throw Exception(result.errorBody()?.string())
   }
 }

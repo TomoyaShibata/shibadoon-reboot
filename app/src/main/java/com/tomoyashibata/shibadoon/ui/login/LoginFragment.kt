@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.toast
+import androidx.navigation.fragment.findNavController
+import com.tomoyashibata.shibadoon.R
 import com.tomoyashibata.shibadoon.databinding.FragmentLoginBinding
 import com.tomoyashibata.shibadoon.model.data.Authentication
 import com.tomoyashibata.shibadoon.ui.BaseFragment
@@ -30,13 +32,10 @@ class LoginFragment : BaseFragment() {
     this.subscribeToNavigationChanges()
   }
 
-  override fun onSaveInstanceState(outState: Bundle) {
-    super.onSaveInstanceState(outState)
-  }
-
   override fun subscribeToNavigationChanges() {
     this.viewModel.instanceBlankErrorEvent.observe(this, Observer { this.showToast("正しいインスタンス名を入力してください") })
     this.viewModel.onRegisterAppEvent.observe(this, Observer { it?.let { this.hoge(it) } })
+    this.viewModel.onLoginFinishEvent.observe(this, Observer { this.navigateToMainFragment() })
   }
 
   fun hoge(authentication: Authentication) {
@@ -45,6 +44,10 @@ class LoginFragment : BaseFragment() {
     val customTabs = CustomTabsIntent.Builder().build()
     customTabs.intent.data = Uri.parse(url)
     this.startActivityForResult(customTabs.intent, 100)
+  }
+
+  private fun navigateToMainFragment() {
+    this.findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
   }
 
   private fun showToast(message: String) {

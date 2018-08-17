@@ -1,11 +1,11 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 1,
-    "identityHash": "fb7e2c916f8e34aec4341fc59999a8b0",
+    "version": 3,
+    "identityHash": "2fc23c443a784b16cae5f81fa6075dae",
     "entities": [
       {
-        "tableName": "SavedAccount",
+        "tableName": "SavedAccessToken",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `accessToken` TEXT NOT NULL, `instance` TEXT NOT NULL)",
         "fields": [
           {
@@ -37,7 +37,7 @@
         "foreignKeys": []
       },
       {
-        "tableName": "Token",
+        "tableName": "AccessToken",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`accessToken` TEXT NOT NULL, `tokenType` TEXT NOT NULL, `scope` TEXT NOT NULL, `createdAt` TEXT NOT NULL, PRIMARY KEY(`accessToken`))",
         "fields": [
           {
@@ -121,7 +121,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"fb7e2c916f8e34aec4341fc59999a8b0\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"2fc23c443a784b16cae5f81fa6075dae\")"
     ]
   }
 }

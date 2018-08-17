@@ -14,8 +14,8 @@ data class Account(
   val note: String,
   val url: String,
   val avatar: String,
-  @Json(name = "avatarStatic")
-  val avatar_static: String,
+  @Json(name = "avatar_static")
+  val avatarStatic: String,
   val header: String,
   @Json(name = "header_static")
   val headerStatic: String,

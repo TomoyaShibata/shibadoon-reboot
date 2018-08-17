@@ -28,16 +28,18 @@ class LoginViewModel(
       this@LoginViewModel.authentication = async { this@LoginViewModel.instance.value?.let { this@LoginViewModel.loginUseCase.execute(it) } }.await()
       this@LoginViewModel.onRegisterAppEvent.apply {
         value = this@LoginViewModel.authentication
-        call()
       }
     }
   }
 
+  val onLoginFinishEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
   fun onSuccessGetCode(code: String) {
-    async {
-      this@LoginViewModel.authentication?.let {
-        this@LoginViewModel.getTokenUseCase.execute(this@LoginViewModel.instance.value!!, it, code)
-      }
+    val instance = this.instance.value ?: return
+    val authentication = this@LoginViewModel.authentication ?: return
+
+    ui {
+      async { this@LoginViewModel.getTokenUseCase.execute(instance, authentication, code) }.await()
+      this@LoginViewModel.onLoginFinishEvent.call()
     }
   }
 }
