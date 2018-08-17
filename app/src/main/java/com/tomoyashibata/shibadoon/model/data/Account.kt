@@ -14,17 +14,17 @@ data class Account(
   val note: String,
   val url: String,
   val avatar: String,
-  @Json(name = "avatarStatic")
-  val avatar_static: String,
+  @Json(name = "avatar_static")
+  val avatarStatic: String,
   val header: String,
   @Json(name = "header_static")
   val headerStatic: String,
   @Json(name = "followers_count")
-  val followersCount: Number,
+  val followersCount: Int,
   @Json(name = "following_count")
-  val followingCount: Number,
+  val followingCount: Int,
   @Json(name = "statuses_count")
-  val statusesCount: Number,
+  val statusesCount: Int,
   val source: Source,
   val emojis: List<Any>,
   val moved: Account?,

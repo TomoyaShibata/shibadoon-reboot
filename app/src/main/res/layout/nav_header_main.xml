@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+  <data>
+
+    <variable
+      name="viewModel"
+      type="com.tomoyashibata.shibadoon.ui.home.HomeViewModel" />
+  </data>
+
+  <android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="192dp"
+    android:accountHeader="@{viewModel.currentSavedAccount}"
+    android:background="@color/colorPrimary"
+    android:clickable="true"
+    android:fitsSystemWindows="true"
+    android:focusable="true">
+
+    <ImageView
+      android:id="@+id/imageView"
+      android:layout_width="64dp"
+      android:layout_height="64dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      android:userAvatar="@{viewModel.currentSavedAccount}"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+      android:id="@+id/textView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginBottom="8dp"
+      android:text="@{viewModel.currentSavedAccount.displayName}"
+      android:textColor="@android:color/white"
+      app:layout_constraintBottom_toTopOf="@+id/textView2"
+      app:layout_constraintStart_toStartOf="parent"
+      tools:text="バトルプログラマー柴田智也✅" />
+
+    <TextView
+      android:id="@+id/textView2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginBottom="8dp"
+      android:canonicalUsername="@{viewModel.currentSavedAccount}"
+      android:textColor="@android:color/white"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      tools:text="@tomoya_shibata" />
+  </android.support.constraint.ConstraintLayout>
+</layout>

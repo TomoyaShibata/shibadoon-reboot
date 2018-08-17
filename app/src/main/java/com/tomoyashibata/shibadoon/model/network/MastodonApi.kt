@@ -14,11 +14,11 @@ interface MastodonApi {
   fun fetchAccount(@Path("id") id: String): Call<Account>
 
   @GET("/api/v1/accounts/verify_credentials")
-  fun getCurrentUser(): Call<Account>
+  fun getCurrentAccount(): Call<Account>
 
   @POST("api/v1/apps")
   fun registerApp(@Body app: App): Deferred<Authentication>
 
   @POST("oauth/token")
-  fun getToken(@Body requestToken: RequestToken): Deferred<Token>
+  fun getToken(@Body requestAccessToken: RequestAccessToken): Deferred<AccessToken>
 }

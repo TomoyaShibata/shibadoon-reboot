@@ -5,5 +5,9 @@
   <string name="hello_blank_fragment">Hello blank fragment</string>
 
   <!-- fragment_login -->
+  <string name="login_instance_edit_hint">インスタンス名</string>
   <string name="login_button_text">ログイン</string>
+
+  <!-- BindingAdapter -->
+  <string name="canonical_username_text">\@%1$s\@%2$s</string>
 </resources>

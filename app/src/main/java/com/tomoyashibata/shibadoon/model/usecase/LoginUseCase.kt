@@ -13,7 +13,7 @@ class LoginUseCase(
     val app = App()
     launch(cont.context) {
       try {
-        val authentication = this@LoginUseCase.appRepository.registerApp(app)
+        val authentication = this@LoginUseCase.appRepository.registerApp(instance, app)
         if (authentication == null) {
           cont.resumeWithException(Exception("custom"))
           return@launch

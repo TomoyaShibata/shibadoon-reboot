@@ -4,7 +4,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class RequestToken(
+data class RequestAccessToken(
   @Json(name = "grant_type")
   val grantType: String = "authorization_code",
   @Json(name = "redirect_uri")
