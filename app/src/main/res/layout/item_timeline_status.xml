@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+  <data>
+
+    <variable
+      name="title"
+      type="String" />
+
+    <variable
+      name="status"
+      type="com.tomoyashibata.shibadoon.model.data.Status" />
+  </data>
+
+  <android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+      android:id="@+id/avatar_image"
+      android:layout_width="48dp"
+      android:layout_height="48dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="16dp"
+      android:userAvatar="@{status.account}"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+      android:id="@+id/content_text"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginEnd="8dp"
+      app:content="@{status}"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/avatar_image"
+      app:layout_constraintTop_toBottomOf="@+id/display_name_text"
+      tools:text="対応する Entity クラス用意して Streaming API に接続して放置してエラーになるパターンを検出するだけのテスト" />
+
+    <TextView
+      android:id="@+id/display_name_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="16dp"
+      app:displayName="@{status.account}"
+      app:layout_constraintStart_toEndOf="@+id/avatar_image"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:text="バトルプログラマー柴田智也" />
+
+    <TextView
+      android:id="@+id/created_at_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:layout_marginEnd="8dp"
+      app:createdAt="@{status}"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+      android:id="@+id/reply_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:srcCompat="@drawable/ic_reply"
+      tools:layout_editor_absoluteX="96dp"
+      tools:layout_editor_absoluteY="235dp" />
+
+    <ImageButton
+      android:id="@+id/more_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:srcCompat="@drawable/ic_more"
+      tools:layout_editor_absoluteX="266dp"
+      tools:layout_editor_absoluteY="320dp" />
+
+    <com.google.android.material.chip.Chip
+      android:id="@+id/chip"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      tools:layout_editor_absoluteX="80dp"
+      tools:layout_editor_absoluteY="120dp" />
+  </android.support.constraint.ConstraintLayout>
+</layout>

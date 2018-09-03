@@ -5,6 +5,8 @@ import org.koin.dsl.module.module
 
 val useCaseModule = module {
   single { ChangeCurrentSavedAccountUseCase(get()) }
+  single { FetchHomeTimelineUseCase(get()) }
+  single { FetchOldHomeTimelineUseCase(get()) }
   single { GetAccountsUseCase(get()) }
   single { GetCurrentSavedAccountUseCase(get(), get()) }
   single { GetSavedAccountsUseCase(get(), get()) }

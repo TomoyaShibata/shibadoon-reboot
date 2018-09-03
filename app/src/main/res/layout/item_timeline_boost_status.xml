@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+  <data>
+
+    <variable
+      name="title"
+      type="String" />
+
+    <variable
+      name="status"
+      type="com.tomoyashibata.shibadoon.model.data.Status" />
+  </data>
+
+  <android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+      android:id="@+id/avatar_image"
+      android:layout_width="48dp"
+      android:layout_height="48dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:userAvatar="@{status.reblog.account}"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/boosted_account_text"
+      tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+      android:id="@+id/content_text"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginEnd="8dp"
+      android:layout_marginBottom="16dp"
+      app:content="@{status.reblog}"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/avatar_image"
+      app:layout_constraintTop_toBottomOf="@+id/display_name_text"
+      tools:text="対応する Entity クラス用意して Streaming API に接続して放置してエラーになるパターンを検出するだけのテスト" />
+
+    <TextView
+      android:id="@+id/display_name_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      app:displayName="@{status.reblog.account}"
+      app:layout_constraintStart_toEndOf="@+id/avatar_image"
+      app:layout_constraintTop_toBottomOf="@+id/boosted_account_text"
+      tools:text="バトルプログラマー柴田智也" />
+
+    <TextView
+      android:id="@+id/created_at_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:layout_marginEnd="8dp"
+      app:createdAt="@{status.reblog}"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/boosted_account_text" />
+
+    <TextView
+      android:id="@+id/boosted_account_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      app:boostedAccount="@{status.account}"
+      app:layout_constraintStart_toStartOf="@+id/display_name_text"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+      android:id="@+id/boosted_avatar_image"
+      android:layout_width="19dp"
+      android:layout_height="19dp"
+      android:layout_marginTop="16dp"
+      android:layout_marginEnd="8dp"
+      android:userAvatar="@{status.account}"
+      app:layout_constraintEnd_toStartOf="@+id/boosted_account_text"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:srcCompat="@tools:sample/avatars" />
+  </android.support.constraint.ConstraintLayout>
+</layout>

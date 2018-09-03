@@ -1,7 +1,9 @@
 package com.tomoyashibata.shibadoon.model.data
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class Account(
   val id: String,
   val username: String,
@@ -25,7 +27,6 @@ data class Account(
   val followingCount: Int,
   @Json(name = "statuses_count")
   val statusesCount: Int,
-  val source: Source,
   val emojis: List<Any>,
   val moved: Account?,
   val fields: List<Any>?,

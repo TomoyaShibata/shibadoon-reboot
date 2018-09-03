@@ -39,6 +39,7 @@ class HomeFragment : BaseFragment() {
     this.subscribeToNavigationChanges()
     this.setupActionBar()
     this.setupDrawer()
+    this.setupFragments()
   }
 
   override fun subscribeToNavigationChanges() {
@@ -101,6 +102,10 @@ class HomeFragment : BaseFragment() {
       .withToolbar(this.toolbar)
       .withSliderBackgroundColorRes(R.color.colorPrimary)
       .build()
+  }
+
+  private fun setupFragments() {
+    this.home_view_pager.adapter = HomeFragmentPagerAdapter(this.requireFragmentManager())
   }
 
   private fun navigateToLoginFragment() = this.findNavController().navigate(R.id.action_mainFragment_to_loginFragment)

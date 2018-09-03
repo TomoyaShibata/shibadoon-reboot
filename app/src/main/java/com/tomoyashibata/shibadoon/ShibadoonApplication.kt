@@ -3,6 +3,9 @@ package com.tomoyashibata.shibadoon
 import android.app.Application
 import co.zsmb.materialdrawerkt.imageloader.drawerImageLoader
 import com.bumptech.glide.Glide
+import com.bumptech.glide.annotation.GlideModule
+import com.bumptech.glide.module.AppGlideModule
+import com.jakewharton.threetenabp.AndroidThreeTen
 import com.tomoyashibata.shibadoon.di.*
 import org.koin.android.ext.android.startKoin
 import timber.log.Timber
@@ -13,6 +16,9 @@ class ShibadoonApplication : Application() {
     super.onCreate()
 
     this.setupTimber()
+
+    AndroidThreeTen.init(this)
+
     this.setupKoin()
     this.setupMaterialDrawer()
   }
@@ -41,3 +47,6 @@ class ShibadoonApplication : Application() {
     }
   }
 }
+
+@GlideModule
+class MyAppGlideModule() : AppGlideModule()

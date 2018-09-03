@@ -10,4 +10,5 @@
 
   <!-- BindingAdapter -->
   <string name="canonical_username_text">\@%1$s\@%2$s</string>
+  <string name="boosted_account_text">%sさんがブーストしました</string>
 </resources>

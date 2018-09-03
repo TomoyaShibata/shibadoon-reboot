@@ -8,4 +8,5 @@ val repositoryModule = module {
   single { AppRepository() }
   single { SavedAccessTokenRepository(get(), get()) }
   single { AccessTokenRepository(get()) }
+  single { TimelinesRepository() }
 }
