@@ -1,14 +1,14 @@
 package com.tomoyashibata.shibadoon.ui.home
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import com.tomoyashibata.shibadoon.ui.hometimeline.HomeTimelineFragment
 
 class HomeFragmentPagerAdapter(
-  fm: FragmentManager
-) : FragmentPagerAdapter(fm) {
-  override fun getItem(p0: Int): Fragment {
+  fm: androidx.fragment.app.FragmentManager
+) : androidx.fragment.app.FragmentPagerAdapter(fm) {
+  override fun getItem(p0: Int): androidx.fragment.app.Fragment {
     return HomeTimelineFragment.newInstance()
   }
 

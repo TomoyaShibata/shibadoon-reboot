@@ -7,6 +7,7 @@ val repositoryModule = module {
   single { AccountRepository() }
   single { AppRepository() }
   single { SavedAccessTokenRepository(get(), get()) }
+  single { StatusesRepository() }
   single { AccessTokenRepository(get()) }
   single { TimelinesRepository() }
 }

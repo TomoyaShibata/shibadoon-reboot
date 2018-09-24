@@ -13,4 +13,5 @@ val useCaseModule = module {
   single { GetTokenUseCase(get(), get()) }
   single { HasSavedTokenUseCase(get()) }
   single { LoginUseCase(get()) }
+  single { ToggleStatusReblogUseCase(get()) }
 }

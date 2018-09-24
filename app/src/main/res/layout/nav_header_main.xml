@@ -10,7 +10,7 @@
       type="com.tomoyashibata.shibadoon.ui.home.HomeViewModel" />
   </data>
 
-  <android.support.constraint.ConstraintLayout
+  <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="192dp"
     android:accountHeader="@{viewModel.currentSavedAccount}"
@@ -52,6 +52,6 @@
       android:textColor="@android:color/white"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      tools:text="@tomoya_shibata" />
-  </android.support.constraint.ConstraintLayout>
+      tools:text="/@tomoya_shibata" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

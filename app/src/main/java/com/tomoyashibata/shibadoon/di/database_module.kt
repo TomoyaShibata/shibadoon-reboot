@@ -1,6 +1,6 @@
 package com.tomoyashibata.shibadoon.di
 
-import android.arch.persistence.room.Room
+import androidx.room.Room
 import com.tomoyashibata.shibadoon.database.AppDatabase
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module.module

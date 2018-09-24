@@ -7,12 +7,13 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.tomoyashibata.shibadoon.model.network.MastodonApi
 import com.tomoyashibata.shibadoon.ui.home.HomeViewModel
 import com.tomoyashibata.shibadoon.ui.hometimeline.HomeTimelineViewModel
+import com.tomoyashibata.shibadoon.ui.hometimeline.ItemTimelineStatusViewModel
 import com.tomoyashibata.shibadoon.ui.login.LoginViewModel
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
 import org.koin.android.ext.koin.androidContext
-import org.koin.android.viewmodel.ext.koin.viewModel
+import org.koin.androidx.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -22,6 +23,7 @@ val shibadoonModule = module {
   viewModel { HomeViewModel(get(), get(), get(), get()) }
   viewModel { HomeTimelineViewModel(get(), get()) }
   viewModel { LoginViewModel(get(), get()) }
+  viewModel { ItemTimelineStatusViewModel(get()) }
 }
 
 val sharedPreferenceModule = module {

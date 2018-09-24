@@ -1,6 +1,6 @@
 package com.tomoyashibata.shibadoon.dao
 
-import android.arch.persistence.room.*
+import androidx.room.*
 import com.tomoyashibata.shibadoon.model.data.SavedAccessToken
 
 @Dao

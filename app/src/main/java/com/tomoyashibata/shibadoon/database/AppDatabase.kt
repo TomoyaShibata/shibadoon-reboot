@@ -1,7 +1,7 @@
 package com.tomoyashibata.shibadoon.database
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.RoomDatabase
+import androidx.room.Database
+import androidx.room.RoomDatabase
 import com.tomoyashibata.shibadoon.dao.SavedAccessTokenDao
 import com.tomoyashibata.shibadoon.dao.TokenDao
 import com.tomoyashibata.shibadoon.model.data.SavedAccessToken

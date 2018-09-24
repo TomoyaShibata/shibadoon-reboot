@@ -1,6 +1,6 @@
 package com.tomoyashibata.shibadoon.ui.hometimeline
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import com.here.oksse.OkSse
 import com.here.oksse.ServerSentEvent
 import com.squareup.moshi.JsonDataException
@@ -22,6 +22,8 @@ class HomeTimelineViewModel(
 ) : ViewModel() {
   val statuses: ArrayList<Status> = arrayListOf()
 
+  val requestScrollToLatestStatusEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
+
   init {
     this.sseStart()
     this.fetchHomeTimeline()
@@ -29,12 +31,24 @@ class HomeTimelineViewModel(
 
   private fun fetchHomeTimeline() {
     ui {
-      this@HomeTimelineViewModel.statuses.addAll(async { this@HomeTimelineViewModel.fetchHomeTimelineUseCase.execute() }.await())
-      this@HomeTimelineViewModel.onChangedStatusesEvent.call()
+      this@HomeTimelineViewModel.also {
+        it.statuses.addAll(async { it.fetchHomeTimelineUseCase.execute() }.await())
+        it.onChangedStatusesEvent.call()
+        it.requestScrollToLatestStatusEvent.call()
+      }
     }
   }
 
   fun fetchOldHomeTimeline() {
+    if (this.statuses.isEmpty()) return
+
+    val maxId = this.statuses.last().id
+
+    ui {
+      val oldStatuses = async { this@HomeTimelineViewModel.fetchOldHomeTimelineUseCase.execute(maxId) }.await()
+      this@HomeTimelineViewModel.statuses.addAll(oldStatuses)
+      this@HomeTimelineViewModel.onChangedStatusesEvent.call()
+    }
   }
 
   val onChangedStatusesEvent: SingleLiveEvent<Unit> = SingleLiveEvent()

@@ -12,11 +12,15 @@
     <variable
       name="status"
       type="com.tomoyashibata.shibadoon.model.data.Status" />
+
+    <variable
+      name="viewModel"
+      type="com.tomoyashibata.shibadoon.ui.hometimeline.ItemTimelineStatusViewModel" />
   </data>
 
-  <android.support.constraint.ConstraintLayout
+  <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
       android:id="@+id/avatar_image"
@@ -24,7 +28,7 @@
       android:layout_height="48dp"
       android:layout_marginStart="8dp"
       android:layout_marginTop="16dp"
-      android:userAvatar="@{status.account}"
+      android:userAvatar="@{viewModel.status.account}"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       tools:srcCompat="@tools:sample/avatars" />
@@ -36,7 +40,7 @@
       android:layout_marginStart="8dp"
       android:layout_marginTop="8dp"
       android:layout_marginEnd="8dp"
-      app:content="@{status}"
+      app:content="@{viewModel.status}"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toEndOf="@+id/avatar_image"
       app:layout_constraintTop_toBottomOf="@+id/display_name_text"
@@ -48,7 +52,7 @@
       android:layout_height="wrap_content"
       android:layout_marginStart="8dp"
       android:layout_marginTop="16dp"
-      app:displayName="@{status.account}"
+      app:displayName="@{viewModel.status.account}"
       app:layout_constraintStart_toEndOf="@+id/avatar_image"
       app:layout_constraintTop_toTopOf="parent"
       tools:text="バトルプログラマー柴田智也" />
@@ -59,7 +63,7 @@
       android:layout_height="wrap_content"
       android:layout_marginTop="16dp"
       android:layout_marginEnd="8dp"
-      app:createdAt="@{status}"
+      app:createdAt="@{viewModel.status}"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
 
@@ -67,23 +71,45 @@
       android:id="@+id/reply_button"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      app:srcCompat="@drawable/ic_reply"
-      tools:layout_editor_absoluteX="96dp"
-      tools:layout_editor_absoluteY="235dp" />
+      android:layout_marginTop="8dp"
+      app:layout_constraintEnd_toStartOf="@+id/boost_button"
+      app:layout_constraintStart_toEndOf="@+id/avatar_image"
+      app:layout_constraintTop_toBottomOf="@+id/content_text"
+      app:srcCompat="@drawable/ic_reply" />
+
+    <ImageButton
+      android:id="@+id/boost_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:onClick="@{()->viewModel.onClickReblog()}"
+      app:layout_constraintBottom_toBottomOf="@+id/reply_button"
+      app:layout_constraintEnd_toStartOf="@+id/favorite_button"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toEndOf="@+id/reply_button"
+      app:layout_constraintTop_toTopOf="@+id/reply_button"
+      app:srcCompat="@drawable/ic_boost" />
+
+    <ImageButton
+      android:id="@+id/favorite_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_constraintBottom_toBottomOf="@+id/boost_button"
+      app:layout_constraintEnd_toStartOf="@+id/more_button"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toEndOf="@+id/boost_button"
+      app:layout_constraintTop_toTopOf="@+id/boost_button"
+      app:srcCompat="@drawable/ic_favorite" />
 
     <ImageButton
       android:id="@+id/more_button"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      app:srcCompat="@drawable/ic_more"
-      tools:layout_editor_absoluteX="266dp"
-      tools:layout_editor_absoluteY="320dp" />
+      app:layout_constraintBottom_toBottomOf="@+id/favorite_button"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toEndOf="@+id/favorite_button"
+      app:layout_constraintTop_toTopOf="@+id/favorite_button"
+      app:srcCompat="@drawable/ic_more" />
 
-    <com.google.android.material.chip.Chip
-      android:id="@+id/chip"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      tools:layout_editor_absoluteX="80dp"
-      tools:layout_editor_absoluteY="120dp" />
-  </android.support.constraint.ConstraintLayout>
+  </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
