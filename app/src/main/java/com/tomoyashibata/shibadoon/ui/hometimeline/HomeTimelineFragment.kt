@@ -34,7 +34,7 @@ class HomeTimelineFragment : BaseFragment() {
 
   override fun subscribeToNavigationChanges() {
     this.viewModel.also {
-      it.onChangedStatusesEvent.observe(this, Observer { this.updateRV() })
+      it.onChangedStatusesEvent.observe(this, Observer { this.updateHomeTimelineController() })
       it.requestScrollToLatestStatusEvent.observe(this, Observer { this.scrollToLatestStatus() })
     }
   }
@@ -47,7 +47,7 @@ class HomeTimelineFragment : BaseFragment() {
     this.homeTimelineController.fetch.observe(this, Observer { this@HomeTimelineFragment.viewModel.fetchOldHomeTimeline() })
   }
 
-  private fun updateRV() {
+  private fun updateHomeTimelineController() {
     this.homeTimelineController.requestModelBuild()
   }
 
