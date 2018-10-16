@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
 import com.tomoyashibata.shibadoon.databinding.FragmentHomeTimelineBinding
 import com.tomoyashibata.shibadoon.ui.BaseFragment
 import kotlinx.android.synthetic.main.fragment_home_timeline.*
@@ -52,5 +53,9 @@ class HomeTimelineFragment : BaseFragment() {
 
   private fun scrollToLatestStatus() {
     this.home_timeline_recycler.smoothScrollToPosition(0)
+  }
+
+  private fun showSnackbar() {
+    this.view?.let { Snackbar.make(it, "Snackbar", Snackbar.LENGTH_SHORT).show() }
   }
 }
