@@ -8,4 +8,9 @@
   <!-- Navigation View -->
   <color name="colorDrawerBackground">#444b5d</color>
   <color name="material_drawer_primary_text">#ffffffff</color>
+
+  <!-- Timeline Views -->
+  <color name="statusBackground">#282c37</color>
+  <color name="statusTextColor">#ffffff</color>
+  <color name="statusTextColorLink">#2b90d9</color>
 </resources>

@@ -9,5 +9,13 @@
     <item name="android:textColorSecondary">@android:color/white</item>
     <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     <item name="android:statusBarColor">@android:color/transparent</item>
+    <item name="android:scrollbarThumbVertical">@color/colorPrimaryDark</item>
+  </style>
+
+  <!-- Timeline Views -->
+  <style name="StatusTheme">
+    <item name="android:background">@color/statusBackground</item>
+    <item name="android:textColor">@color/statusTextColor</item>
+    <item name="android:textColorLink">@color/statusTextColorLink</item>
   </style>
 </resources>
