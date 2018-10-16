@@ -67,21 +67,22 @@
 
     <TextView
       android:id="@+id/boosted_account_text"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
       android:layout_marginTop="16dp"
       app:boostedAccount="@{status.account}"
-      app:layout_constraintStart_toStartOf="@+id/display_name_text"
-      app:layout_constraintTop_toTopOf="parent" />
+      app:layout_constraintStart_toEndOf="@+id/boosted_avatar_image"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:text="柴田智也さんがブーストしました" />
 
     <ImageView
       android:id="@+id/boosted_avatar_image"
       android:layout_width="19dp"
       android:layout_height="19dp"
       android:layout_marginTop="16dp"
-      android:layout_marginEnd="8dp"
       android:userAvatar="@{status.account}"
-      app:layout_constraintEnd_toStartOf="@+id/boosted_account_text"
+      app:layout_constraintEnd_toEndOf="@+id/avatar_image"
       app:layout_constraintTop_toTopOf="parent"
       tools:srcCompat="@tools:sample/avatars" />
   </androidx.constraintlayout.widget.ConstraintLayout>
