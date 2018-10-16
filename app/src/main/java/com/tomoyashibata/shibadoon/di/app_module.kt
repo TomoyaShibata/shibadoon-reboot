@@ -59,8 +59,8 @@ val repositoryModule = module {
 val databaseModule = module {
   single {
     Room.databaseBuilder(this.androidContext(), AppDatabase::class.java, "shibadoon")
-            .fallbackToDestructiveMigration()
-            .build()
+      .fallbackToDestructiveMigration()
+      .build()
   }
 }
 
