@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import co.zsmb.materialdrawerkt.builders.AccountHeaderBuilderKt
 import co.zsmb.materialdrawerkt.draweritems.profile.profile
@@ -109,7 +108,7 @@ class HomeFragment : BaseFragment() {
   }
 
   private fun setupFragments() {
-    this.home_view_pager.adapter = HomeFragmentPagerAdapter(this.requireFragmentManager())
+    this.home_view_pager.adapter = HomeFragmentPagerAdapter(this.childFragmentManager)
   }
 
   private fun navigateToLoginFragment() =
