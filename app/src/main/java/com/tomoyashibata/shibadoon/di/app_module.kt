@@ -1,10 +1,14 @@
 package com.tomoyashibata.shibadoon.di
 
 import android.content.Context
+import androidx.room.Room
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.tomoyashibata.shibadoon.database.AppDatabase
 import com.tomoyashibata.shibadoon.model.network.MastodonApi
+import com.tomoyashibata.shibadoon.model.repository.*
+import com.tomoyashibata.shibadoon.model.usecase.*
 import com.tomoyashibata.shibadoon.ui.createtoot.CreateTootViewModel
 import com.tomoyashibata.shibadoon.ui.home.HomeViewModel
 import com.tomoyashibata.shibadoon.ui.hometimeline.HomeTimelineViewModel
@@ -27,6 +31,39 @@ val shibadoonModule = module {
   viewModel { LoginViewModel(get(), get()) }
   viewModel { ItemTimelineStatusViewModel(get()) }
 }
+
+val useCaseModule = module {
+  single { ChangeCurrentSavedAccountUseCase(get()) }
+  single { CreateTootUseCase(get()) }
+  single { FetchHomeTimelineUseCase(get()) }
+  single { FetchOldHomeTimelineUseCase(get()) }
+  single { GetAccountsUseCase(get()) }
+  single { GetCurrentSavedAccountUseCase(get(), get()) }
+  single { GetSavedAccountsUseCase(get(), get()) }
+  single { GetTokenUseCase(get(), get()) }
+  single { HasSavedTokenUseCase(get()) }
+  single { LoginUseCase(get()) }
+  single { ToggleStatusReblogUseCase(get()) }
+}
+
+
+val repositoryModule = module {
+  single { AccountRepository() }
+  single { AppRepository() }
+  single { SavedAccessTokenRepository(get(), get()) }
+  single { StatusesRepository() }
+  single { AccessTokenRepository(get()) }
+  single { TimelinesRepository() }
+}
+
+val databaseModule = module {
+  single {
+    Room.databaseBuilder(this.androidContext(), AppDatabase::class.java, "shibadoon")
+            .fallbackToDestructiveMigration()
+            .build()
+  }
+}
+
 
 val sharedPreferenceModule = module {
   single {
