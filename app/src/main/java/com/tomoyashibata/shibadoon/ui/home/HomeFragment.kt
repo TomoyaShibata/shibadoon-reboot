@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import co.zsmb.materialdrawerkt.builders.AccountHeaderBuilderKt
 import co.zsmb.materialdrawerkt.draweritems.profile.profile
 import com.mikepenz.materialdrawer.AccountHeader
@@ -15,7 +16,7 @@ import com.mikepenz.materialdrawer.AccountHeaderBuilder
 import com.mikepenz.materialdrawer.DrawerBuilder
 import com.mikepenz.materialdrawer.holder.ImageHolder
 import com.mikepenz.materialdrawer.model.ProfileSettingDrawerItem
-//import com.tomoyashibata.shibadoon.R
+import com.tomoyashibata.shibadoon.R
 import com.tomoyashibata.shibadoon.databinding.FragmentHomeBinding
 import com.tomoyashibata.shibadoon.ui.BaseFragment
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -44,9 +45,10 @@ class HomeFragment : BaseFragment() {
 
   override fun subscribeToNavigationChanges() {
     this.viewModel.apply {
-      //      onRequestNavigateToLoginFragmentEvent.observe(this@HomeFragment, Observer { this@HomeFragment.navigateToLoginFragment() })
-//      postGetAccountsEvent.observe(this@HomeFragment, Observer { this@HomeFragment.setupDrawerAccountHeader() })
-//      postChangeAccountEvent.observe(this@HomeFragment, Observer { this@HomeFragment.navigateToMainFragment() })
+      onRequestNavigateToLoginFragmentEvent.observe(this@HomeFragment, Observer { this@HomeFragment.navigateToLoginFragment() })
+      postGetAccountsEvent.observe(this@HomeFragment, Observer { this@HomeFragment.setupDrawerAccountHeader() })
+      postChangeAccountEvent.observe(this@HomeFragment, Observer { this@HomeFragment.navigateToMainFragment() })
+      onClickCreateTootEvent.observe(this@HomeFragment, Observer { this@HomeFragment.navigateToCreateTootFragment() })
     }
   }
 
@@ -67,7 +69,7 @@ class HomeFragment : BaseFragment() {
       val profile = AccountHeaderBuilderKt(this.requireActivity()).profile(displayName, canonicalUsername) {
         identifier = accessTokenId
         nameShown = true
-        iconUrl = account.avatarStatic
+        iconUrl = account.avatar
         onClick { _, _, drawerItem ->
           this@HomeFragment.viewModel.changeCurrentSaved(drawerItem.identifier)
           return@onClick false
@@ -82,11 +84,11 @@ class HomeFragment : BaseFragment() {
       addProfiles(
         ProfileSettingDrawerItem()
           .withOnDrawerItemClickListener { view, position, drawerItem ->
-            //            this@HomeFragment.navigateToLoginFragment()
+            this@HomeFragment.navigateToLoginFragment()
             return@withOnDrawerItemClickListener false
           }
           .withName("アカウントを追加")
-//          .withIcon(R.drawable.ic_add)
+          .withIcon(R.drawable.ic_add)
       )
     }
   }
@@ -99,17 +101,23 @@ class HomeFragment : BaseFragment() {
     DrawerBuilder()
       .withActivity(this.requireActivity())
       .withAccountHeader(this.accountHeader)
-      //.withToolbar(this.toolbar)
-//      .withSliderBackgroundColorRes(R.color.colorPrimary)
+      .withToolbar(this.toolbar)
+      .withSliderBackgroundColorRes(R.color.colorPrimary)
       .build()
+
+    com.tomoyashibata.shibadoon.R.color.colorPrimary
   }
 
   private fun setupFragments() {
-
-
     this.home_view_pager.adapter = HomeFragmentPagerAdapter(this.requireFragmentManager())
   }
 
-//  private fun navigateToLoginFragment() = this.requireActivity().findNavController(0).navigate(R.id.action_mainFragment_to_loginFragment)
-//  private fun navigateToMainFragment() = this.requireActivity().findNavController(0).navigate(R.id.action_mainFragment_self)
+  private fun navigateToLoginFragment() =
+    this.findNavController().navigate(R.id.action_mainFragment_to_loginFragment)
+
+  private fun navigateToMainFragment() =
+    this.findNavController().navigate(R.id.action_mainFragment_self)
+
+  private fun navigateToCreateTootFragment() =
+    this.findNavController().navigate(R.id.action_mainFragment_to_createTootFragment)
 }

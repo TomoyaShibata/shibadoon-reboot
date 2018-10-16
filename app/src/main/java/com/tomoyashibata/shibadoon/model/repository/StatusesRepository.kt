@@ -4,6 +4,7 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.Coroutin
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.tomoyashibata.shibadoon.di.AuthenticationInterceptor
+import com.tomoyashibata.shibadoon.model.data.PostStatus
 import com.tomoyashibata.shibadoon.model.data.Status
 import com.tomoyashibata.shibadoon.model.network.MastodonApi
 import okhttp3.OkHttpClient
@@ -31,5 +32,10 @@ class StatusesRepository {
   fun unreblog(id: Long): Status {
     val result = this.service.unreblog(id).execute()
     return result.body() ?: throw  Exception(result.errorBody()?.string())
+  }
+
+  fun postStatus(postStatus: PostStatus): Status {
+    val result = this.service.postStatus(postStatus).execute()
+    return result.body() ?: throw Exception(result.errorBody()?.string())
   }
 }

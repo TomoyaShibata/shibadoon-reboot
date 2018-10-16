@@ -30,13 +30,14 @@ interface MastodonApi {
   ): Call<List<Status>>
 
   // Statuses
-  //POST /api/v1/statuses/:id/reblog
   @POST("/api/v1/statuses/{id}/reblog")
   fun reblog(@Path("id") id: Long): Call<Status>
 
-  //POST /api/v1/statuses/:id/unreblog
   @POST("/api/v1/statuses/{id}/unreblog")
   fun unreblog(@Path("id") id: Long): Call<Status>
+
+  @POST("/api/v1/statuses")
+  fun postStatus(@Body postStatus: PostStatus): Call<Status>
 
   // Streaming API
   // GET /api/v1/streaming/public

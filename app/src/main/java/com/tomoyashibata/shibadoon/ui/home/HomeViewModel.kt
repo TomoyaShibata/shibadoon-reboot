@@ -49,4 +49,9 @@ class HomeViewModel(
       this@HomeViewModel.postChangeAccountEvent.call()
     }
   }
+
+  val onClickCreateTootEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
+  fun onClickCreateTootButton() {
+    this.onClickCreateTootEvent.call()
+  }
 }

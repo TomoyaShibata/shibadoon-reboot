@@ -20,6 +20,14 @@
     <action
       android:id="@+id/action_mainFragment_self"
       app:destination="@id/mainFragment" />
+    <action
+      android:id="@+id/action_mainFragment_to_createTootFragment"
+      app:destination="@id/createTootFragment"
+      app:enterAnim="@anim/slide_from_right"
+      app:exitAnim="@anim/slide_to_left"
+      app:popEnterAnim="@anim/slide_from_left"
+      app:popExitAnim="@anim/slide_to_right"
+      app:popUpToInclusive="false" />
   </fragment>
   <fragment
     android:id="@+id/login_fragment"
@@ -34,4 +42,9 @@
       app:popEnterAnim="?android:fragmentOpenEnterAnimation"
       app:popExitAnim="?android:fragmentOpenEnterAnimation" />
   </fragment>
+  <fragment
+    android:id="@+id/createTootFragment"
+    android:name="com.tomoyashibata.shibadoon.ui.createtoot.CreateTootFragment"
+    android:label="fragment_create_toot"
+    tools:layout="@layout/fragment_create_toot" />
 </navigation>

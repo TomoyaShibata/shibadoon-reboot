@@ -5,6 +5,7 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.Coroutin
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.tomoyashibata.shibadoon.model.network.MastodonApi
+import com.tomoyashibata.shibadoon.ui.createtoot.CreateTootViewModel
 import com.tomoyashibata.shibadoon.ui.home.HomeViewModel
 import com.tomoyashibata.shibadoon.ui.hometimeline.HomeTimelineViewModel
 import com.tomoyashibata.shibadoon.ui.hometimeline.ItemTimelineStatusViewModel
@@ -20,6 +21,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.io.IOException
 
 val shibadoonModule = module {
+  viewModel { CreateTootViewModel(get()) }
   viewModel { HomeViewModel(get(), get(), get(), get()) }
   viewModel { HomeTimelineViewModel(get(), get()) }
   viewModel { LoginViewModel(get(), get()) }
