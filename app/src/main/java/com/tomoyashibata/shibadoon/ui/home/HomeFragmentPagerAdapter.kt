@@ -1,16 +1,18 @@
 package com.tomoyashibata.shibadoon.ui.home
 
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
 import com.tomoyashibata.shibadoon.ui.hometimeline.HomeTimelineFragment
+import com.tomoyashibata.shibadoon.ui.notifications.NotificationsFragment
 
 class HomeFragmentPagerAdapter(
   fm: androidx.fragment.app.FragmentManager
 ) : androidx.fragment.app.FragmentPagerAdapter(fm) {
   override fun getItem(p0: Int): androidx.fragment.app.Fragment {
-    return HomeTimelineFragment.newInstance()
+    return when (p0) {
+      0 -> HomeTimelineFragment.newInstance()
+      1 -> NotificationsFragment()
+      else -> HomeTimelineFragment.newInstance()
+    }
   }
 
-  override fun getCount(): Int = 1
+  override fun getCount(): Int = 2
 }

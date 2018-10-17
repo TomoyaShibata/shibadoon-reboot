@@ -6,7 +6,6 @@ import android.net.Uri
 import android.text.Html
 import android.text.format.DateFormat
 import android.text.method.LinkMovementMethod
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -93,4 +92,10 @@ fun TextView.setContent(status: Status) {
 fun TextView.setBoostedAccount(account: Account) {
   val displayName = if (account.displayName.isBlank()) account.username else account.displayName
   this.text = this.context.getString(R.string.boosted_account_text, displayName)
+}
+
+@BindingAdapter("favoritedAccount")
+fun TextView.setFavoritedAccount(account: Account) {
+  val displayName = if (account.displayName.isBlank()) account.username else account.displayName
+  this.text = this.context.getString(R.string.favorited_account_text, displayName)
 }

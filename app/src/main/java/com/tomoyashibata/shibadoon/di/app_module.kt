@@ -14,6 +14,7 @@ import com.tomoyashibata.shibadoon.ui.home.HomeViewModel
 import com.tomoyashibata.shibadoon.ui.hometimeline.HomeTimelineViewModel
 import com.tomoyashibata.shibadoon.ui.hometimeline.ItemTimelineStatusViewModel
 import com.tomoyashibata.shibadoon.ui.login.LoginViewModel
+import com.tomoyashibata.shibadoon.ui.notifications.NotificationsViewModel
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -29,6 +30,7 @@ val shibadoonModule = module {
   viewModel { HomeViewModel(get(), get(), get(), get()) }
   viewModel { HomeTimelineViewModel(get(), get()) }
   viewModel { LoginViewModel(get(), get()) }
+  viewModel { NotificationsViewModel(get()) }
   viewModel { ItemTimelineStatusViewModel(get()) }
 }
 
@@ -36,6 +38,7 @@ val useCaseModule = module {
   single { ChangeCurrentSavedAccountUseCase(get()) }
   single { CreateTootUseCase(get()) }
   single { FetchHomeTimelineUseCase(get()) }
+  single { FetchNotificationsUseCase(get()) }
   single { FetchOldHomeTimelineUseCase(get()) }
   single { GetAccountsUseCase(get()) }
   single { GetCurrentSavedAccountUseCase(get(), get()) }
@@ -50,6 +53,7 @@ val useCaseModule = module {
 val repositoryModule = module {
   single { AccountRepository() }
   single { AppRepository() }
+  single { NotificationsRepository() }
   single { SavedAccessTokenRepository(get(), get()) }
   single { StatusesRepository() }
   single { AccessTokenRepository(get()) }

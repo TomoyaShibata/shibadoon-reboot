@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <data>
+
+    <variable
+      name="notification"
+      type="com.tomoyashibata.shibadoon.model.data.Notification" />
+
+    <variable
+      name="viewModel"
+      type="com.tomoyashibata.shibadoon.ui.notifications.NotificationsViewModel" />
+  </data>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:theme="@style/StatusTheme">
+
+    <TextView
+      android:id="@+id/notification_favorited_account_text"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginEnd="8dp"
+      app:favoritedAccount="@{notification.account}"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/notification_avatar_image"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+      layout="@layout/include_notification_status"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      app:layout_constraintTop_toBottomOf="@id/notification_favorited_account_text"
+      app:notification="@{notification}" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

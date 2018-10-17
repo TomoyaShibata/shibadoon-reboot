@@ -19,6 +19,15 @@ interface MastodonApi {
   @POST("oauth/token")
   fun getToken(@Body requestAccessToken: RequestAccessToken): Deferred<AccessToken>
 
+  // Notifications
+  @GET("/api/v1/notifications")
+  fun fetchNotification(
+    @Query("max_id") maxId: Long? = null,
+    @Query("since_id") sinceId: Long? = null,
+    @Query("limit") limit: Int? = null,
+    @Query("exclude_types") excludeTypes: Array<String>? = null
+  ): Call<List<Notification>>
+
   // Timelines
   @GET("/api/v1/timelines/home")
   fun fetchHomeTimeline(
