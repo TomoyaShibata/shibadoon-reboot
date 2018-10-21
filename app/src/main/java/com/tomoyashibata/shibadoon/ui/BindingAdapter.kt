@@ -6,6 +6,7 @@ import android.net.Uri
 import android.text.Html
 import android.text.format.DateFormat
 import android.text.method.LinkMovementMethod
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -86,6 +87,19 @@ fun TextView.setContent(status: Status) {
   this.movementMethod = LinkMovementMethod.getInstance()
   this.linksClickable = true
   this.highlightColor = Color.TRANSPARENT
+}
+
+@BindingAdapter(value = ["status", "mediaAttachmentPosition"])
+fun ImageView.setContentImage(status: Status, mediaAttachmentPosition: Int) {
+  val mediaAttachement = status.mediaAttachments.getOrNull(mediaAttachmentPosition)
+  if (mediaAttachement == null) {
+    this.visibility = View.GONE
+    GlideApp.with(this.context).clear(this)
+    return
+  }
+
+  this.visibility = View.VISIBLE
+  GlideApp.with(this.context).load(mediaAttachement.url).into(this)
 }
 
 @BindingAdapter("boostedAccount")

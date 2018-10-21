@@ -72,10 +72,9 @@
       android:id="@+id/reply_button"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginTop="8dp"
       app:layout_constraintEnd_toStartOf="@+id/boost_button"
       app:layout_constraintStart_toEndOf="@+id/avatar_image"
-      app:layout_constraintTop_toBottomOf="@+id/content_text"
+      app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
       app:srcCompat="@drawable/ic_reply" />
 
     <ImageButton
@@ -112,5 +111,74 @@
       app:layout_constraintTop_toTopOf="@+id/favorite_button"
       app:srcCompat="@drawable/ic_more" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/constraintLayout"
+      android:layout_width="0dp"
+      android:layout_height="200dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginEnd="8dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/avatar_image"
+      app:layout_constraintTop_toBottomOf="@+id/content_text">
+
+      <ImageView
+        android:id="@+id/timeline_image_1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/timeline_image_2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:mediaAttachmentPosition="@{0}"
+        app:status="@{status}"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+      <ImageView
+        android:id="@+id/timeline_image_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@+id/timeline_image_3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/timeline_image_1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:mediaAttachmentPosition="@{1}"
+        app:status="@{status}"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+      <ImageView
+        android:id="@+id/timeline_image_3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@+id/timeline_image_4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/timeline_image_2"
+        app:layout_constraintTop_toBottomOf="@+id/timeline_image_2"
+        app:mediaAttachmentPosition="@{2}"
+        app:status="@{status}"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+      <ImageView
+        android:id="@+id/timeline_image_4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/timeline_image_2"
+        app:layout_constraintTop_toBottomOf="@+id/timeline_image_3"
+        app:mediaAttachmentPosition="@{3}"
+        app:status="@{status}"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
   </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
