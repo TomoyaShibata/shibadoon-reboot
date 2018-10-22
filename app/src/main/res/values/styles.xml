@@ -12,9 +12,28 @@
     <item name="android:scrollbarThumbVertical">@color/colorPrimaryDark</item>
   </style>
 
+  <!-- App -->
+  <style name="FloatingActionButtonTheme">
+    <item name="android:backgroundTint">@color/colorPrimaryDark</item>
+  </style>
+
+  <style name="BaseToolbar" parent="@style/Widget.AppCompat.Toolbar">
+    <item name="android:theme">@style/ToolbarTheme</item>
+  </style>
+
+  <style name="ToolbarTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="android:textColorPrimary">@android:color/white</item>
+    <item name="android:textColorSecondary">@android:color/white</item>
+    <item name="android:background">@color/colorPrimaryDark</item>
+  </style>
+
+  <!-- Home View -->
+  <style name="HomeTheme">
+    <item name="android:background">@color/homeBackground</item>
+  </style>
+
   <!-- Timeline Views -->
   <style name="StatusTheme">
-    <item name="android:background">@color/statusBackground</item>
     <item name="android:textColor">@color/statusTextColor</item>
     <item name="android:textColorLink">@color/statusTextColorLink</item>
   </style>
