@@ -10,6 +10,7 @@
 
   <!-- BindingAdapter -->
   <string name="canonical_username_text">\@%1$s\@%2$s</string>
-  <string name="boosted_account_text">%sさんがあなたのトゥートをブーストしました</string>
+  <string name="status_prepend_text">%sさんがブースト</string>
+  <string name="notification_prepend_text">%sさんがあなたのトゥートをブーストしました</string>
   <string name="favorited_account_text">%sさんがあなたのトゥートをお気に入りに登録しました</string>
 </resources>

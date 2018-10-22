@@ -13,6 +13,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
@@ -89,6 +90,11 @@ fun TextView.setContent(status: Status) {
   this.highlightColor = Color.TRANSPARENT
 }
 
+@BindingAdapter("hasMediaAttachments")
+fun ConstraintLayout.hasMediaAttachments(status: Status) {
+  this.visibility = if (status.mediaAttachments.isEmpty()) View.GONE else View.VISIBLE
+}
+
 @BindingAdapter(value = ["status", "mediaAttachmentPosition"])
 fun ImageView.setContentImage(status: Status, mediaAttachmentPosition: Int) {
   val mediaAttachement = status.mediaAttachments.getOrNull(mediaAttachmentPosition)
@@ -99,13 +105,22 @@ fun ImageView.setContentImage(status: Status, mediaAttachmentPosition: Int) {
   }
 
   this.visibility = View.VISIBLE
-  GlideApp.with(this.context).load(mediaAttachement.url).into(this)
+  GlideApp.with(this.context)
+    .load(mediaAttachement.url)
+    .transition(DrawableTransitionOptions.withCrossFade())
+    .into(this)
 }
 
-@BindingAdapter("boostedAccount")
-fun TextView.setBoostedAccount(account: Account) {
+@BindingAdapter("notificationPrepend")
+fun TextView.setNotificationPrepend(account: Account) {
   val displayName = if (account.displayName.isBlank()) account.username else account.displayName
-  this.text = this.context.getString(R.string.boosted_account_text, displayName)
+  this.text = this.context.getString(R.string.notification_prepend_text, displayName)
+}
+
+@BindingAdapter("statusPrepend")
+fun TextView.setStatusPrepend(account: Account) {
+  val displayName = if (account.displayName.isBlank()) account.username else account.displayName
+  this.text = this.context.getString(R.string.status_prepend_text, displayName)
 }
 
 @BindingAdapter("favoritedAccount")

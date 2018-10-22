@@ -12,17 +12,17 @@ import java.util.*
 
 class HomeTimelineController(
   private val data: ArrayList<Status>,
-  private val loadingMore: Boolean = false
+  private val loadingMore: Boolean = false,
+  private val viewModel: HomeTimelineViewModel
 ) : EpoxyController() {
   val fetch: SingleLiveEvent<Unit> = SingleLiveEvent()
-
 
   override fun buildModels() {
     this.data.forEach {
       if (it.reblog == null) {
         itemTimelineStatus {
           id(it.id)
-          viewModel(ItemTimelineStatusViewModel(it))
+          viewModel(this@HomeTimelineController.viewModel)
           status(it)
         }
 
@@ -31,6 +31,7 @@ class HomeTimelineController(
 
       itemTimelineBoostStatus {
         id(it.id)
+        viewModel(this@HomeTimelineController.viewModel)
         status(it)
       }
     }

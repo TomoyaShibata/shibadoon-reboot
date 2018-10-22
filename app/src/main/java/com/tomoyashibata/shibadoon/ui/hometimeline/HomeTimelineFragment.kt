@@ -41,7 +41,7 @@ class HomeTimelineFragment : BaseFragment() {
   private lateinit var homeTimelineController: HomeTimelineController
 
   private fun setupRecyclerView() {
-    this.homeTimelineController = HomeTimelineController(this.viewModel.statuses)
+    this.homeTimelineController = HomeTimelineController(this.viewModel.statuses, false, this.viewModel)
     this.home_timeline_recycler.setControllerAndBuildModels(this.homeTimelineController)
     this.homeTimelineController.fetch.observe(this, Observer { this@HomeTimelineFragment.viewModel.fetchOldHomeTimeline() })
   }
