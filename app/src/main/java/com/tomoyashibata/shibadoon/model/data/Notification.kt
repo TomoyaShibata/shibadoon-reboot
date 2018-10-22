@@ -10,7 +10,7 @@ data class Notification(
   @Json(name = "created_at")
   val createdAt: String,
   val account: Account,
-  val status: Status
+  val status: Status?
 )
 
 enum class NotificationType {
