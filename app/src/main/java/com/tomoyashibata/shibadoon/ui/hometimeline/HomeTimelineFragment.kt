@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.tomoyashibata.shibadoon.databinding.FragmentHomeTimelineBinding
 import com.tomoyashibata.shibadoon.ui.BaseFragment
 import kotlinx.android.synthetic.main.fragment_home_timeline.*
@@ -43,6 +44,7 @@ class HomeTimelineFragment : BaseFragment() {
   private fun setupRecyclerView() {
     this.homeTimelineController = HomeTimelineController(this.viewModel.statuses, false, this.viewModel)
     this.home_timeline_recycler.setControllerAndBuildModels(this.homeTimelineController)
+    this.home_timeline_recycler.addItemDecoration(DividerItemDecoration(this.requireContext(), DividerItemDecoration.VERTICAL))
     this.homeTimelineController.fetch.observe(this, Observer { this@HomeTimelineFragment.viewModel.fetchOldHomeTimeline() })
   }
 
