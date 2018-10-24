@@ -76,10 +76,11 @@ private fun generateDateTimeFormatterPattern(zonedDateTime: ZonedDateTime): Stri
   val localDate = zonedDateTime.toLocalDate()
   val nowLocalDate = LocalDate.now()
 
-  if (localDate == nowLocalDate) return "HH:mm:ss"
-  if (localDate.year == nowLocalDate.year) return "MM.dd HH:mm:ss"
-
-  return "YYYY.MM.dd HH:mm:ss"
+  return when {
+    localDate == nowLocalDate -> "HH:mm:ss"
+    localDate.year == nowLocalDate.year -> "MM.dd HH:mm:ss"
+    else -> "YYYY.MM.dd HH:mm:ss"
+  }
 }
 
 @BindingAdapter("content")
