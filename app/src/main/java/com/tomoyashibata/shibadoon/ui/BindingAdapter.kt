@@ -3,13 +3,13 @@ package com.tomoyashibata.shibadoon.ui
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.net.Uri
-import android.text.Html
 import android.text.format.DateFormat
 import android.text.method.LinkMovementMethod
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.text.HtmlCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -85,7 +85,8 @@ private fun generateDateTimeFormatterPattern(zonedDateTime: ZonedDateTime): Stri
 
 @BindingAdapter("content")
 fun TextView.setContent(status: Status) {
-  this.text = Html.fromHtml(status.content, Html.FROM_HTML_MODE_COMPACT)
+  // 最終行の下部に不要な行が生まれてしまうため \n を取り除いている
+  this.text = HtmlCompat.fromHtml(status.content, HtmlCompat.FROM_HTML_MODE_COMPACT).removeSuffix("\n")
   this.movementMethod = LinkMovementMethod.getInstance()
   this.linksClickable = true
   this.highlightColor = Color.TRANSPARENT
