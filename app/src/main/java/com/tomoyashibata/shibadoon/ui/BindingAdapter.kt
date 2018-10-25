@@ -6,9 +6,11 @@ import android.net.Uri
 import android.text.format.DateFormat
 import android.text.method.LinkMovementMethod
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.text.HtmlCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
@@ -27,8 +29,9 @@ import org.threeten.bp.ZonedDateTime
 import org.threeten.bp.format.DateTimeFormatter
 
 @BindingAdapter("displayName")
-fun TextView.setDisplayName(account: Account) {
-  val displayName = if (account.displayName.isBlank()) account.username else account.displayName
+fun TextView.setDisplayName(status: Status) {
+  val targetAccount = status.reblog?.account ?: status.account
+  val displayName = if (targetAccount.displayName.isBlank()) targetAccount.username else targetAccount.displayName
   this.text = displayName
 }
 
@@ -40,10 +43,17 @@ fun TextView.setCanonicalUsername(account: Account?) {
   this.text = this.context.getString(R.string.canonical_username_text, account.username, instance)
 }
 
-@BindingAdapter("android:userAvatar")
-fun ImageView.setUserAvatar(account: Account?) {
-  if (account == null) return
+@BindingAdapter("userAvatar")
+fun ImageView.setUserAvatar(status: Status) {
+  val targetAccount = status.reblog?.account ?: status.account
+  GlideApp.with(this)
+    .load(targetAccount.avatar)
+    .apply(RequestOptions().transform(RoundedCorners(this.resources.getDimensionPixelSize(R.dimen.user_avatar_radius))))
+    .into(this)
+}
 
+@BindingAdapter("rebloggedUserAvatar")
+fun ImageView.setRebloggedUserAvatar(account: Account) {
   GlideApp.with(this)
     .load(account.avatar)
     .apply(RequestOptions().transform(RoundedCorners(this.resources.getDimensionPixelSize(R.dimen.user_avatar_radius))))
@@ -129,4 +139,18 @@ fun TextView.setStatusPrepend(account: Account) {
 fun TextView.setFavoritedAccount(account: Account) {
   val displayName = if (account.displayName.isBlank()) account.username else account.displayName
   this.text = this.context.getString(R.string.favorited_account_text, displayName)
+}
+
+@BindingAdapter("reblogButtonColor")
+fun ImageButton.setReblogButtonColor(status: Status) {
+  val targetStatus = status.reblog ?: status
+  val color = if (targetStatus.reblogged == true) R.color.imageButtonIsReblogged else R.color.imageButtonDefault
+  this.setColorFilter(ResourcesCompat.getColor(this.resources, color, null))
+}
+
+@BindingAdapter("favouriteButtonColor")
+fun ImageButton.setFavouriteButtonColor(status: Status) {
+  val targetStatus = status.reblog ?: status
+  val color = if (targetStatus.favourited == true) R.color.imageButtonIsIsFavourited else R.color.imageButtonDefault
+  this.setColorFilter(ResourcesCompat.getColor(this.resources, color, null))
 }

@@ -12,7 +12,6 @@ import com.tomoyashibata.shibadoon.model.usecase.*
 import com.tomoyashibata.shibadoon.ui.createtoot.CreateTootViewModel
 import com.tomoyashibata.shibadoon.ui.home.HomeViewModel
 import com.tomoyashibata.shibadoon.ui.hometimeline.HomeTimelineViewModel
-import com.tomoyashibata.shibadoon.ui.hometimeline.ItemTimelineStatusViewModel
 import com.tomoyashibata.shibadoon.ui.login.LoginViewModel
 import com.tomoyashibata.shibadoon.ui.notifications.NotificationsViewModel
 import okhttp3.Interceptor
@@ -28,10 +27,9 @@ import java.io.IOException
 val shibadoonModule = module {
   viewModel { CreateTootViewModel(get()) }
   viewModel { HomeViewModel(get(), get(), get(), get()) }
-  viewModel { HomeTimelineViewModel(get(), get()) }
+  viewModel { HomeTimelineViewModel(get(), get(), get(), get()) }
   viewModel { LoginViewModel(get(), get()) }
   viewModel { NotificationsViewModel(get()) }
-  viewModel { ItemTimelineStatusViewModel(get()) }
 }
 
 val useCaseModule = module {
@@ -40,13 +38,15 @@ val useCaseModule = module {
   single { FetchHomeTimelineUseCase(get()) }
   single { FetchNotificationsUseCase(get()) }
   single { FetchOldHomeTimelineUseCase(get()) }
+  single { FetchStatusUseCase(get()) }
   single { GetAccountsUseCase(get()) }
   single { GetCurrentSavedAccountUseCase(get(), get()) }
   single { GetSavedAccountsUseCase(get(), get()) }
   single { GetTokenUseCase(get(), get()) }
   single { HasSavedTokenUseCase(get()) }
   single { LoginUseCase(get()) }
-  single { ToggleStatusReblogUseCase(get()) }
+  single { ToggleFavouriteUseCase(get()) }
+  single { ToggleReblogUseCase(get()) }
 }
 
 

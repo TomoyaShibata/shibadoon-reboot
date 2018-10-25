@@ -1,5 +1,6 @@
 package com.tomoyashibata.shibadoon.ui.hometimeline
 
+import android.view.View
 import androidx.lifecycle.ViewModel
 import com.here.oksse.OkSse
 import com.here.oksse.ServerSentEvent
@@ -7,8 +8,7 @@ import com.squareup.moshi.JsonDataException
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.tomoyashibata.shibadoon.model.data.Status
-import com.tomoyashibata.shibadoon.model.usecase.FetchHomeTimelineUseCase
-import com.tomoyashibata.shibadoon.model.usecase.FetchOldHomeTimelineUseCase
+import com.tomoyashibata.shibadoon.model.usecase.*
 import com.tomoyashibata.shibadoon.ui.SingleLiveEvent
 import com.tomoyashibata.shibadoon.ui.async
 import com.tomoyashibata.shibadoon.ui.ui
@@ -18,7 +18,9 @@ import timber.log.Timber
 
 class HomeTimelineViewModel(
   private val fetchHomeTimelineUseCase: FetchHomeTimelineUseCase,
-  private val fetchOldHomeTimelineUseCase: FetchOldHomeTimelineUseCase
+  private val fetchOldHomeTimelineUseCase: FetchOldHomeTimelineUseCase,
+  private val toggleFavouriteUseCase: ToggleFavouriteUseCase,
+  private val toggleReblogUseCase: ToggleReblogUseCase
 ) : ViewModel() {
   val statuses: ArrayList<Status> = arrayListOf()
 
@@ -113,5 +115,25 @@ class HomeTimelineViewModel(
       override fun onClosed(sse: ServerSentEvent?) {
       }
     })
+  }
+
+  val onChangedReblogEvent: SingleLiveEvent<View> = SingleLiveEvent()
+  fun onClickReblog(view: View, status: Status) {
+    ui {
+      val newStatus = async { this@HomeTimelineViewModel.toggleReblogUseCase.execute(status) }.await()
+      val index = this@HomeTimelineViewModel.statuses.indexOf(status)
+      this@HomeTimelineViewModel.statuses[index] = newStatus
+      this@HomeTimelineViewModel.onChangedReblogEvent.value = view
+    }
+  }
+
+  val onChangedFavouriteEvent: SingleLiveEvent<View> = SingleLiveEvent()
+  fun onClickFavourite(view: View, status: Status) {
+    ui {
+      val newStatus = async { this@HomeTimelineViewModel.toggleFavouriteUseCase.execute(status) }.await()
+      val index = this@HomeTimelineViewModel.statuses.indexOf(status)
+      this@HomeTimelineViewModel.statuses[index] = newStatus
+      this@HomeTimelineViewModel.onChangedFavouriteEvent.value = view
+    }
   }
 }

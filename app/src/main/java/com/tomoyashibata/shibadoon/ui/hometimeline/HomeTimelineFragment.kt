@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.tomoyashibata.shibadoon.R
 import com.tomoyashibata.shibadoon.databinding.FragmentHomeTimelineBinding
 import com.tomoyashibata.shibadoon.ui.BaseFragment
 import kotlinx.android.synthetic.main.fragment_home_timeline.*
@@ -36,6 +38,8 @@ class HomeTimelineFragment : BaseFragment() {
     this.viewModel.also {
       it.onChangedStatusesEvent.observe(this, Observer { this.updateHomeTimelineController() })
       it.requestScrollToLatestStatusEvent.observe(this, Observer { this.scrollToLatestStatus() })
+      it.onChangedReblogEvent.observe(this, Observer { this.startAnimationRotationButton(it) })
+      it.onChangedFavouriteEvent.observe(this, Observer { this.startAnimationRotationButton(it) })
     }
   }
 
@@ -54,5 +58,11 @@ class HomeTimelineFragment : BaseFragment() {
 
   private fun scrollToLatestStatus() {
     this.home_timeline_recycler.smoothScrollToPosition(0)
+  }
+
+  private fun startAnimationRotationButton(view: View?) {
+    val animation = AnimationUtils.loadAnimation(this.requireContext(), R.anim.rotation_button)
+    view?.startAnimation(animation)
+    this.homeTimelineController.requestModelBuild()
   }
 }

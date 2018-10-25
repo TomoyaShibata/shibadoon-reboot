@@ -19,6 +19,13 @@ interface MastodonApi {
   @POST("oauth/token")
   fun getToken(@Body requestAccessToken: RequestAccessToken): Deferred<AccessToken>
 
+  // Favourites
+  @POST("/api/v1/statuses/{id}/favourite")
+  fun favourite(@Path("id") id: Long): Call<Status>
+
+  @POST("/api/v1/statuses/{id}/unfavourite")
+  fun unfavourite(@Path("id") id: Long): Call<Status>
+
   // Notifications
   @GET("/api/v1/notifications")
   fun fetchNotification(
@@ -39,6 +46,9 @@ interface MastodonApi {
   ): Call<List<Status>>
 
   // Statuses
+  @GET("/api/v1/statuses/{id}")
+  fun fetchStatus(@Path("id") id: Long): Call<Status>
+
   @POST("/api/v1/statuses/{id}/reblog")
   fun reblog(@Path("id") id: Long): Call<Status>
 

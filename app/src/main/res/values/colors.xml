@@ -16,4 +16,7 @@
   <color name="statusTextColor">#ffffff</color>
   <color name="statusTextColorLink">#2b90d9</color>
   <color name="mediaAttachmentBackground">#444b5d</color>
+  <color name="imageButtonDefault">#ffffff</color>
+  <color name="imageButtonIsReblogged">#2588d0</color>
+  <color name="imageButtonIsIsFavourited">#ca8f04</color>
 </resources>

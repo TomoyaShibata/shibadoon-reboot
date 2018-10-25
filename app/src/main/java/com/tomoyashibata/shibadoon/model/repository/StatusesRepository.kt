@@ -24,6 +24,21 @@ class StatusesRepository {
       }.build())
     }.build().create(MastodonApi::class.java)
 
+  fun fetchStatus(id: Long): Status {
+    val result = this.service.fetchStatus(id).execute()
+    return result.body() ?: throw  Exception(result.errorBody()?.string())
+  }
+
+  fun favourite(id: Long): Status {
+    val result = this.service.favourite(id).execute()
+    return result.body() ?: throw  Exception(result.errorBody()?.string())
+  }
+
+  fun unfavourite(id: Long): Status {
+    val result = this.service.unfavourite(id).execute()
+    return result.body() ?: throw  Exception(result.errorBody()?.string())
+  }
+
   fun reblog(id: Long): Status {
     val result = this.service.reblog(id).execute()
     return result.body() ?: throw  Exception(result.errorBody()?.string())
