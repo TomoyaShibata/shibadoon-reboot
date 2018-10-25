@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.tomoyashibata.shibadoon.R
 import com.tomoyashibata.shibadoon.databinding.FragmentHomeTimelineBinding
 import com.tomoyashibata.shibadoon.ui.BaseFragment
+import com.tomoyashibata.shibadoon.ui.home.HomeFragmentDirections
 import kotlinx.android.synthetic.main.fragment_home_timeline.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -41,6 +43,8 @@ class HomeTimelineFragment : BaseFragment() {
       it.onChangedReblogEvent.observe(this, Observer { this.startAnimationRotationButton(it) })
       it.onChangedFavouriteEvent.observe(this, Observer { this.startAnimationRotationButton(it) })
     }
+
+    this.viewModel.onClickMediaAttachmentThumbEvent.observe(this, Observer { it?.let { (urls, position) -> this.intNav(urls, position) } })
   }
 
   private lateinit var homeTimelineController: HomeTimelineController
@@ -64,5 +68,12 @@ class HomeTimelineFragment : BaseFragment() {
     val animation = AnimationUtils.loadAnimation(this.requireContext(), R.anim.rotation_button)
     view?.startAnimation(animation)
     this.homeTimelineController.requestModelBuild()
+  }
+
+  private fun intNav(urls: List<String>, position: Int) {
+    val action = HomeFragmentDirections.ActionMainFragmentToMediaImagesFragment()
+      .setUrls(urls.joinToString(","))
+      .setFirstViewPosition(position)
+    this.findNavController().navigate(action)
   }
 }

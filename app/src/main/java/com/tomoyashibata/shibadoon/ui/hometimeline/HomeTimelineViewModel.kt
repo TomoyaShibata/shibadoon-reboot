@@ -8,7 +8,10 @@ import com.squareup.moshi.JsonDataException
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.tomoyashibata.shibadoon.model.data.Status
-import com.tomoyashibata.shibadoon.model.usecase.*
+import com.tomoyashibata.shibadoon.model.usecase.FetchHomeTimelineUseCase
+import com.tomoyashibata.shibadoon.model.usecase.FetchOldHomeTimelineUseCase
+import com.tomoyashibata.shibadoon.model.usecase.ToggleFavouriteUseCase
+import com.tomoyashibata.shibadoon.model.usecase.ToggleReblogUseCase
 import com.tomoyashibata.shibadoon.ui.SingleLiveEvent
 import com.tomoyashibata.shibadoon.ui.async
 import com.tomoyashibata.shibadoon.ui.ui
@@ -135,5 +138,10 @@ class HomeTimelineViewModel(
       this@HomeTimelineViewModel.statuses[index] = newStatus
       this@HomeTimelineViewModel.onChangedFavouriteEvent.value = view
     }
+  }
+
+  val onClickMediaAttachmentThumbEvent: SingleLiveEvent<Pair<List<String>, Int>> = SingleLiveEvent()
+  fun onClickImage(status: Status, position: Int) {
+    this.onClickMediaAttachmentThumbEvent.value = Pair(status.mediaAttachments.map { it.url }, position)
   }
 }

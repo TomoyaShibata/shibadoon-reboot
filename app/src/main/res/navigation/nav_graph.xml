@@ -28,6 +28,9 @@
       app:popEnterAnim="@anim/slide_from_left"
       app:popExitAnim="@anim/slide_to_right"
       app:popUpToInclusive="false" />
+    <action
+      android:id="@+id/action_mainFragment_to_mediaImagesFragment"
+      app:destination="@id/mediaImagesFragment" />
   </fragment>
   <fragment
     android:id="@+id/login_fragment"
@@ -47,4 +50,18 @@
     android:name="com.tomoyashibata.shibadoon.ui.createtoot.CreateTootFragment"
     android:label="fragment_create_toot"
     tools:layout="@layout/fragment_create_toot" />
+  <fragment
+    android:id="@+id/mediaImagesFragment"
+    android:name="com.tomoyashibata.shibadoon.ui.mediaimages.ImageMediaAttachmentsFragment"
+    android:label="MediaImagesFragment"
+    tools:layout="@layout/fragment_image_media_attachments">
+    <argument
+      android:name="urls"
+      android:defaultValue=" "
+      app:argType="string" />
+    <argument
+      android:name="firstViewPosition"
+      android:defaultValue="0"
+      app:argType="integer" />
+  </fragment>
 </navigation>

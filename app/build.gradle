@@ -92,7 +92,9 @@ dependencies {
 
     // AAC Navigation
     def nav_version = "1.0.0-alpha06"
+    implementation "android.arch.navigation:navigation-fragment:$nav_version"
     implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "android.arch.navigation:navigation-ui:$nav_version"
     implementation "android.arch.navigation:navigation-ui-ktx:$nav_version"
     androidTestImplementation "android.arch.navigation:navigation-testing-ktx:$nav_version"
 
@@ -126,6 +128,9 @@ dependencies {
 
     // ThreeTenABP
     implementation "com.jakewharton.threetenabp:threetenabp:1.1.0"
+
+    // PhotoView
+    implementation "com.github.chrisbanes:PhotoView:2.2.0"
 
     testImplementation "junit:junit:4.12"
     androidTestImplementation "androidx.test:runner:1.1.0-beta02"
