@@ -10,6 +10,9 @@
     <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     <item name="android:statusBarColor">@android:color/transparent</item>
     <item name="android:scrollbarThumbVertical">@color/colorPrimaryDark</item>
+    <item name="android:windowContentTransitions">true</item>
+    <item name="android:windowSharedElementEnterTransition">@android:transition/move</item>
+    <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
   </style>
 
   <!-- App -->
@@ -36,5 +39,9 @@
   <style name="StatusTheme">
     <item name="android:textColor">@color/statusTextColor</item>
     <item name="android:textColorLink">@color/statusTextColorLink</item>
+  </style>
+
+  <style name="ImageMediaAttachmentsTheme">
+    <item name="android:background">@color/homeBackground</item>
   </style>
 </resources>
