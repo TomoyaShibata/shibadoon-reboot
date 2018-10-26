@@ -129,7 +129,7 @@
       <ImageView
         android:id="@+id/timeline_image_1"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:backgroundTint="@color/mediaAttachmentBackground"
         android:onClick="@{()->viewModel.onClickImage(status, 0)}"
         android:scaleType="centerCrop"
@@ -182,7 +182,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:backgroundTint="@color/mediaAttachmentBackground"
-        android:onClick="@{()->viewModel.onClickImage(status, 3)}"
+        android:onClick="@{()->viewModel.onClickImage(status,3)}"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
