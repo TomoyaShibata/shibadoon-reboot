@@ -8,7 +8,7 @@ import org.koin.standalone.inject
 
 class AccountRepository : KoinComponent {
   fun getCurrentAccount(instance: String, accessToken: String): Account {
-    val service: MastodonApi by inject { ParameterList(instance, accessToken) }
+    val service: MastodonApi by inject("withParams") { ParameterList(instance, accessToken) }
     val result = service.getCurrentAccount().execute()
     return result.body() ?: throw Exception(result.errorBody()?.string())
   }

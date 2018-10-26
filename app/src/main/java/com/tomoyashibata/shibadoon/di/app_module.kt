@@ -82,7 +82,7 @@ val networkModule = module {
       .build()
   }
 
-  factory { (instance: String, accessToken: String) ->
+  factory<MastodonApi>("withParams") { (instance: String, accessToken: String) ->
     val builder = Retrofit.Builder()
       .baseUrl("https://$instance/")
       .addCallAdapterFactory(CoroutineCallAdapterFactory())
@@ -95,6 +95,22 @@ val networkModule = module {
     }
 
     builder.build().create(MastodonApi::class.java)
+  }
+
+  factory<MastodonApi>("currentAccount") {
+    val currentSavedAccessToken = get<SavedAccessTokenRepository>().getCurrentSavedAccessToken()
+
+    Retrofit.Builder()
+      .baseUrl("https://${currentSavedAccessToken.instance}/")
+      .addCallAdapterFactory(CoroutineCallAdapterFactory())
+      .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder()
+        .add(KotlinJsonAdapterFactory())
+        .build()))
+      .also {
+        it.client(OkHttpClient.Builder().apply {
+          addInterceptor(AuthenticationInterceptor(currentSavedAccessToken.accessToken))
+        }.build())
+      }.build().create(MastodonApi::class.java)
   }
 }
 

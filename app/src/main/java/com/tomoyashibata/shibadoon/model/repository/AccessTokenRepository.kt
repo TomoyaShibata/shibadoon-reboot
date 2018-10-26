@@ -13,10 +13,10 @@ class AccessTokenRepository(
   private val database: AppDatabase
 ) : KoinComponent {
   suspend fun getAccessToken(instance: String, requestAccessToken: RequestAccessToken): AccessToken? {
-    val mastodonApi: MastodonApi by inject { ParameterList(instance, "") }
+    val service: MastodonApi by inject("withParams") { ParameterList(instance, "") }
 
     return try {
-      mastodonApi.getToken(requestAccessToken).await()
+      service.getToken(requestAccessToken).await()
     } catch (e: Exception) {
       null
     }
