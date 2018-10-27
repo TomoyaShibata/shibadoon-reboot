@@ -29,9 +29,9 @@ class ImageMediaAttachmentFragment : Fragment() {
     return binding.root
   }
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-
+  override fun onActivityCreated(savedInstanceState: Bundle?) {
+    super.onActivityCreated(savedInstanceState)
+    this.photo_view.transitionName = this.arguments?.getString(IMAGE_MEDIA_ATTACHMENT_URL)
     this.arguments?.getString(IMAGE_MEDIA_ATTACHMENT_URL)?.let { this.setupPhotoView(it) }
   }
 

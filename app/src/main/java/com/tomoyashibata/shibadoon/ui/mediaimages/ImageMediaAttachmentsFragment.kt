@@ -15,16 +15,17 @@ class ImageMediaAttachmentsFragment : Fragment() {
     return binding.root
   }
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
+  override fun onActivityCreated(savedInstanceState: Bundle?) {
+    super.onActivityCreated(savedInstanceState)
 
+    this.setupViewPager()
+  }
+
+  private fun setupViewPager() {
     val bundle = ImageMediaAttachmentsFragmentArgs.fromBundle(this.arguments)
     val urls = bundle.urls.split(",")
     val firstViewPosition = bundle.firstViewPosition
-    this.setupViewPager(urls, firstViewPosition)
-  }
 
-  private fun setupViewPager(urls: List<String>, firstViewPosition: Int) {
     this.image_media_attachments_view_pager.also {
       it.adapter = ImageMediaAttachmentsFragmentPagerAdapter(urls, this.childFragmentManager)
       it.currentItem = firstViewPosition
