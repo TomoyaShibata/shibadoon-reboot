@@ -4,6 +4,9 @@
   <!-- TODO: Remove or change this placeholder text -->
   <string name="hello_blank_fragment">Hello blank fragment</string>
 
+  <!-- fragment_home -->
+  <string name="home_toolbar_title">Shibadoon</string>
+
   <!-- fragment_login -->
   <string name="login_instance_edit_hint">インスタンス名</string>
   <string name="login_button_text">ログイン</string>

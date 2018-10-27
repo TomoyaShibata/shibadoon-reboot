@@ -8,7 +8,7 @@
   <fragment
     android:id="@+id/mainFragment"
     android:name="com.tomoyashibata.shibadoon.ui.home.HomeFragment"
-    android:label="fragment_main"
+    android:label="Shibadoon"
     tools:layout="@layout/fragment_home">
     <action
       android:id="@+id/action_mainFragment_to_loginFragment"
@@ -29,7 +29,9 @@
       app:popUpToInclusive="false" />
     <action
       android:id="@+id/action_mainFragment_to_mediaImagesFragment"
-      app:destination="@id/mediaImagesFragment" />
+      app:destination="@id/mediaImagesFragment"
+      app:enterAnim="@anim/slide_from_bottom"
+      app:popExitAnim="@anim/slide_to_bottom" />
   </fragment>
   <fragment
     android:id="@+id/login_fragment"
