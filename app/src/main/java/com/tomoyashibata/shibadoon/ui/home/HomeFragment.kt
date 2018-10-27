@@ -89,10 +89,12 @@ class HomeFragment : BaseFragment() {
       .withActivity(this.requireActivity())
       .build()
 
+    DrawerBuilder()
       .withActivity(this.requireActivity())
       .withAccountHeader(this.accountHeader)
-      .withTranslucentStatusBar(false)
-      .withActionBarDrawerToggle(false)      .withSliderBackgroundColorRes(R.color.colorPrimary)
+      .withTranslucentStatusBar(true)
+      .withActionBarDrawerToggle(true)
+      .withSliderBackgroundColorRes(R.color.colorPrimary)
       .build()
   }
 
