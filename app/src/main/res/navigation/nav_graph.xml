@@ -56,7 +56,7 @@
   <fragment
     android:id="@+id/mediaImagesFragment"
     android:name="com.tomoyashibata.shibadoon.ui.mediaimages.ImageMediaAttachmentsFragment"
-    android:label="MediaImagesFragment"
+    android:label="画像"
     tools:layout="@layout/fragment_image_media_attachments">
     <argument
       android:name="urls"
