@@ -23,10 +23,9 @@
     <action
       android:id="@+id/action_mainFragment_to_createTootFragment"
       app:destination="@id/createTootFragment"
-      app:enterAnim="@anim/slide_from_right"
-      app:exitAnim="@anim/slide_to_left"
-      app:popEnterAnim="@anim/slide_from_left"
-      app:popExitAnim="@anim/slide_to_right"
+      app:enterAnim="@anim/slide_from_bottom"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popExitAnim="@anim/slide_to_bottom"
       app:popUpToInclusive="false" />
     <action
       android:id="@+id/action_mainFragment_to_mediaImagesFragment"
@@ -48,7 +47,7 @@
   <fragment
     android:id="@+id/createTootFragment"
     android:name="com.tomoyashibata.shibadoon.ui.createtoot.CreateTootFragment"
-    android:label="fragment_create_toot"
+    android:label="トゥート作成"
     tools:layout="@layout/fragment_create_toot" />
   <fragment
     android:id="@+id/mediaImagesFragment"

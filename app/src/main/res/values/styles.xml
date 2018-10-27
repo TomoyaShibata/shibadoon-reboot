@@ -44,4 +44,18 @@
   <style name="ImageMediaAttachmentsTheme">
     <item name="android:background">@color/homeBackground</item>
   </style>
+
+  <!-- Create Toot View -->
+  <style name="CreateTootTheme">
+    <item name="android:background">@color/homeBackground</item>
+    <item name="android:textColor">@android:color/white</item>
+  </style>
+
+  <style name="CreateTootEditTextStyle">
+    <item name="colorAccent">#2b5fd9</item>
+    <item name="android:textCursorDrawable">@drawable/shape_cursor</item>
+    <item name="android:textColor">@android:color/white</item>
+    <item name="android:textColorHint">@android:color/darker_gray</item>
+    <item name="android:textColorHighlight">#2b5fd9</item>
+  </style>
 </resources>

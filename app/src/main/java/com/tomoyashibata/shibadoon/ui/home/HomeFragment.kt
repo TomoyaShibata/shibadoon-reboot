@@ -8,7 +8,10 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupActionBarWithNavController
 import co.zsmb.materialdrawerkt.builders.AccountHeaderBuilderKt
+import co.zsmb.materialdrawerkt.builders.accountHeader
+import co.zsmb.materialdrawerkt.builders.drawer
 import co.zsmb.materialdrawerkt.draweritems.profile.profile
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
@@ -19,6 +22,7 @@ import com.tomoyashibata.shibadoon.R
 import com.tomoyashibata.shibadoon.databinding.FragmentHomeBinding
 import com.tomoyashibata.shibadoon.ui.BaseFragment
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.main_activity.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment() {
@@ -52,9 +56,10 @@ class HomeFragment : BaseFragment() {
   }
 
   private fun setupActionBar() {
-    val activity = this.requireActivity() as AppCompatActivity
-    activity.setSupportActionBar(this.toolbar)
-    activity.supportActionBar?.setDisplayHomeAsUpEnabled(false)
+//    val activity = this.requireActivity() as AppCompatActivity
+//    activity.setSupportActionBar(this.toolbar)
+//    activity.setupActionBarWithNavController(this.findNavController())
+//    activity.supportActionBar?.title = this.resources.getString(R.string.home_toolbar_title)
   }
 
   private fun setupDrawerAccountHeader() {
@@ -97,14 +102,16 @@ class HomeFragment : BaseFragment() {
       .withActivity(this.requireActivity())
       .build()
 
-    DrawerBuilder()
+    val drawer = DrawerBuilder()
       .withActivity(this.requireActivity())
       .withAccountHeader(this.accountHeader)
-      .withToolbar(this.toolbar)
-      .withSliderBackgroundColorRes(R.color.colorPrimary)
+      .withTranslucentStatusBar(false)
+      .withActionBarDrawerToggle(false)      .withSliderBackgroundColorRes(R.color.colorPrimary)
       .build()
 
-    com.tomoyashibata.shibadoon.R.color.colorPrimary
+//    val activity = this.requireActivity() as AppCompatActivity
+//    activity.supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_menu) // Hacky the vampire coder
+//    activity.supportActionBar?.setDisplayHomeAsUpEnabled(true) // Hacky the vampire coder
   }
 
   private fun setupFragments() {
