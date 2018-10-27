@@ -15,6 +15,8 @@
   <string name="create_toot_toolbar_title">トゥートを作成</string>
   <string name="create_toot_post_button_text">トゥート</string>
   <string name="create_toot_content_edit_hint">今なにしてる？</string>
+  <string name="create_toot_success_message">トゥートしました</string>
+  <string name="create_toot_error_message">エラーが発生しました</string>
 
   <!-- BindingAdapter -->
   <string name="canonical_username_text">\@%1$s\@%2$s</string>

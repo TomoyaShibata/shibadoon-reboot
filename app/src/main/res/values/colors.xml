@@ -19,4 +19,8 @@
   <color name="imageButtonDefault">#ffffff</color>
   <color name="imageButtonIsReblogged">#2588d0</color>
   <color name="imageButtonIsIsFavourited">#ca8f04</color>
+
+  <!-- Create Content View -->
+  <color name="remainTootContentCountTextDefault">#ffffff</color>
+  <color name="remainTootContentCountTextOver">#ff5050</color>
 </resources>

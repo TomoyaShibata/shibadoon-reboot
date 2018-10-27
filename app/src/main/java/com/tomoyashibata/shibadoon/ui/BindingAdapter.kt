@@ -154,3 +154,9 @@ fun ImageButton.setFavouriteButtonColor(status: Status) {
   val color = if (targetStatus.favourited == true) R.color.imageButtonIsIsFavourited else R.color.imageButtonDefault
   this.setColorFilter(ResourcesCompat.getColor(this.resources, color, null))
 }
+
+@BindingAdapter("remainTootContentCountTextColor")
+fun TextView.setRemainTootContentCountTextColor(remainTootContentCountString: String) {
+  val color = if (remainTootContentCountString.toInt() >= 0) R.color.remainTootContentCountTextDefault else R.color.remainTootContentCountTextOver
+  this.setTextColor(ResourcesCompat.getColor(this.resources, color, null))
+}
