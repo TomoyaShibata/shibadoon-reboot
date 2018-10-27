@@ -5,13 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupActionBarWithNavController
 import co.zsmb.materialdrawerkt.builders.AccountHeaderBuilderKt
-import co.zsmb.materialdrawerkt.builders.accountHeader
-import co.zsmb.materialdrawerkt.builders.drawer
 import co.zsmb.materialdrawerkt.draweritems.profile.profile
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
@@ -22,7 +18,6 @@ import com.tomoyashibata.shibadoon.R
 import com.tomoyashibata.shibadoon.databinding.FragmentHomeBinding
 import com.tomoyashibata.shibadoon.ui.BaseFragment
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.main_activity.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment() {
@@ -41,7 +36,6 @@ class HomeFragment : BaseFragment() {
     super.onViewCreated(view, savedInstanceState)
 
     this.subscribeToNavigationChanges()
-    this.setupActionBar()
     this.setupDrawer()
     this.setupFragments()
   }
@@ -53,13 +47,6 @@ class HomeFragment : BaseFragment() {
       postChangeAccountEvent.observe(this@HomeFragment, Observer { this@HomeFragment.navigateToMainFragment() })
       onClickCreateTootEvent.observe(this@HomeFragment, Observer { this@HomeFragment.navigateToCreateTootFragment() })
     }
-  }
-
-  private fun setupActionBar() {
-//    val activity = this.requireActivity() as AppCompatActivity
-//    activity.setSupportActionBar(this.toolbar)
-//    activity.setupActionBarWithNavController(this.findNavController())
-//    activity.supportActionBar?.title = this.resources.getString(R.string.home_toolbar_title)
   }
 
   private fun setupDrawerAccountHeader() {
@@ -102,16 +89,11 @@ class HomeFragment : BaseFragment() {
       .withActivity(this.requireActivity())
       .build()
 
-    val drawer = DrawerBuilder()
       .withActivity(this.requireActivity())
       .withAccountHeader(this.accountHeader)
       .withTranslucentStatusBar(false)
       .withActionBarDrawerToggle(false)      .withSliderBackgroundColorRes(R.color.colorPrimary)
       .build()
-
-//    val activity = this.requireActivity() as AppCompatActivity
-//    activity.supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_menu) // Hacky the vampire coder
-//    activity.supportActionBar?.setDisplayHomeAsUpEnabled(true) // Hacky the vampire coder
   }
 
   private fun setupFragments() {
