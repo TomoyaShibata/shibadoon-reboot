@@ -3,5 +3,10 @@
   <translate
     android:duration="@android:integer/config_mediumAnimTime"
     android:fromYDelta="0"
-    android:toYDelta="-100%p" />
+    android:toYDelta="100%p" />
+
+  <alpha
+    android:duration="@android:integer/config_longAnimTime"
+    android:fromAlpha="1.0"
+    android:toAlpha="0.5"/>
 </set>
