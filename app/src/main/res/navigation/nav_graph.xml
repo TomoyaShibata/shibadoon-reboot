@@ -30,8 +30,10 @@
     <action
       android:id="@+id/action_mainFragment_to_mediaImagesFragment"
       app:destination="@id/mediaImagesFragment"
-      app:enterAnim="@anim/slide_from_bottom"
-      app:popExitAnim="@anim/slide_to_bottom" />
+      app:enterAnim="@anim/fade_in"
+      app:exitAnim="@anim/fade_out"
+      app:popEnterAnim="@anim/fade_in"
+      app:popExitAnim="@anim/fade_out" />
   </fragment>
   <fragment
     android:id="@+id/login_fragment"
