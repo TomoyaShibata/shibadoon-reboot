@@ -5,10 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
-//import com.tomoyashibata.shibadoon.R
+import androidx.navigation.fragment.findNavController
+import com.tomoyashibata.shibadoon.R
 import com.tomoyashibata.shibadoon.databinding.FragmentLoginBinding
 import com.tomoyashibata.shibadoon.model.data.Authentication
 import com.tomoyashibata.shibadoon.ui.BaseFragment
@@ -31,12 +32,12 @@ class LoginFragment : BaseFragment() {
   }
 
   override fun subscribeToNavigationChanges() {
-    this.viewModel.instanceBlankErrorEvent.observe(this, Observer { this.showToast("正しいインスタンス名を入力してください") })
-    this.viewModel.onRegisterAppEvent.observe(this, Observer { it?.let { this.hoge(it) } })
+    this.viewModel.instanceBlankErrorEvent.observe(this, Observer { Toast.makeText(this.requireContext(), "正しいインスタンス名を入力してください", Toast.LENGTH_LONG).show() })
+    this.viewModel.onRegisterAppEvent.observe(this, Observer { it?.let { this.startInstanceAuthorize(it) } })
     this.viewModel.onLoginFinishEvent.observe(this, Observer { this.navigateToMainFragment() })
   }
 
-  fun hoge(authentication: Authentication) {
+  private fun startInstanceAuthorize(authentication: Authentication) {
     Timber.i(authentication.toString())
     val url = "https://${this.viewModel.instance.value}/oauth/authorize?client_id=${authentication.clientId}&redirect_uri=${authentication.redirectUri}&response_type=code&scope=read+write+follow"
     val customTabs = CustomTabsIntent.Builder().build()
@@ -45,11 +46,7 @@ class LoginFragment : BaseFragment() {
   }
 
   private fun navigateToMainFragment() {
-//    this.requireActivity().findNavController(0).navigate(R.id.action_loginFragment_to_mainFragment)
-  }
-
-  private fun showToast(message: String) {
-    //this.requireContext().toast(message, Toast.LENGTH_LONG)
+    this.findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
   }
 
   override fun onResume() {
