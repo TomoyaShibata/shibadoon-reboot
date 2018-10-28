@@ -5,6 +5,10 @@
   <color name="colorPrimaryDark">#191b22</color>
   <color name="colorAccent">@color/colorPrimary</color>
 
+  <!-- Login View -->
+  <color name="loginButtonBackground">#2588d0</color>
+  <color name="loginButtonText">#ffffff</color>
+
   <!-- Home View -->
   <color name="homeBackground">#282c37</color>
 
