@@ -11,6 +11,7 @@ import co.zsmb.materialdrawerkt.builders.AccountHeaderBuilderKt
 import co.zsmb.materialdrawerkt.draweritems.profile.profile
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
+import com.mikepenz.materialdrawer.Drawer
 import com.mikepenz.materialdrawer.DrawerBuilder
 import com.mikepenz.materialdrawer.holder.ImageHolder
 import com.mikepenz.materialdrawer.model.ProfileSettingDrawerItem
@@ -23,12 +24,12 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class HomeFragment : BaseFragment() {
   private val viewModel: HomeViewModel by viewModel()
   private lateinit var accountHeader: AccountHeader
+  private var drawer: Drawer? = null
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     val binding = FragmentHomeBinding.inflate(inflater, container, false)
     binding.viewModel = this.viewModel
     binding.setLifecycleOwner(this)
-    this.setHasOptionsMenu(true)
     return binding.root
   }
 
@@ -36,17 +37,18 @@ class HomeFragment : BaseFragment() {
     super.onViewCreated(view, savedInstanceState)
 
     this.subscribeToNavigationChanges()
-    this.setupDrawer()
-    this.setupFragments()
+    this.viewModel.checkEnableSavedToken()
   }
 
   override fun subscribeToNavigationChanges() {
-    this.viewModel.apply {
-      onRequestNavigateToLoginFragmentEvent.observe(this@HomeFragment, Observer { this@HomeFragment.navigateToLoginFragment() })
-      postGetAccountsEvent.observe(this@HomeFragment, Observer { this@HomeFragment.setupDrawerAccountHeader() })
-      postChangeAccountEvent.observe(this@HomeFragment, Observer { this@HomeFragment.navigateToMainFragment() })
-      onClickCreateTootEvent.observe(this@HomeFragment, Observer { this@HomeFragment.navigateToCreateTootFragment() })
-    }
+    this.viewModel.onRequestNavigateToLoginFragmentEvent.observe(this, Observer { this.navigateToLoginFragment() })
+    this.viewModel.enabledSavedTokenEvent.observe(this, Observer {
+      this.setupDrawer()
+      this.setupViewPager()
+    })
+    this.viewModel.postGetAccountsEvent.observe(this, Observer { this.setupDrawerAccountHeader() })
+    this.viewModel.postChangeAccountEvent.observe(this, Observer { this.navigateToMainFragment() })
+    this.viewModel.onClickCreateTootEvent.observe(this, Observer { this.navigateToCreateTootFragment() })
   }
 
   private fun setupDrawerAccountHeader() {
@@ -74,7 +76,7 @@ class HomeFragment : BaseFragment() {
       setHeaderBackground(ImageHolder(currentSavedAccount.headerStatic))
       addProfiles(
         ProfileSettingDrawerItem()
-          .withOnDrawerItemClickListener { view, position, drawerItem ->
+          .withOnDrawerItemClickListener { _, _, _ ->
             this@HomeFragment.navigateToLoginFragment()
             return@withOnDrawerItemClickListener false
           }
@@ -85,20 +87,23 @@ class HomeFragment : BaseFragment() {
   }
 
   private fun setupDrawer() {
+    if (this.drawer != null) return
+
     this.accountHeader = AccountHeaderBuilder()
       .withActivity(this.requireActivity())
       .build()
 
-    DrawerBuilder()
+    this.drawer = DrawerBuilder()
       .withActivity(this.requireActivity())
       .withAccountHeader(this.accountHeader)
       .withTranslucentStatusBar(true)
       .withActionBarDrawerToggle(true)
-      .withSliderBackgroundColorRes(R.color.colorPrimary)
       .build()
+
+    this.viewModel.getAccounts()
   }
 
-  private fun setupFragments() {
+  private fun setupViewPager() {
     this.home_view_pager.adapter = HomeFragmentPagerAdapter(this.childFragmentManager)
   }
 

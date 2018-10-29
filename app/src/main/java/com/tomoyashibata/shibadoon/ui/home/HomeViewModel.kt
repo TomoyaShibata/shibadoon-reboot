@@ -18,10 +18,11 @@ class HomeViewModel(
   private val hasSavedTokenUseCase: HasSavedTokenUseCase
 ) : ViewModel() {
   val onRequestNavigateToLoginFragmentEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
+  val enabledSavedTokenEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
   var currentSavedAccount: MutableLiveData<Account> = MutableLiveData()
   val savedAccounts: MutableLiveData<List<Pair<Long, Account>>> = MutableLiveData()
 
-  init {
+  fun checkEnableSavedToken() {
     ui {
       val hasSavedToken = async { this@HomeViewModel.hasSavedTokenUseCase.execute() }.await()
       if (!hasSavedToken) {
@@ -29,12 +30,12 @@ class HomeViewModel(
         return@ui
       }
 
-      this@HomeViewModel.getAccounts()
+      this@HomeViewModel.enabledSavedTokenEvent.call()
     }
   }
 
   val postGetAccountsEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
-  private fun getAccounts() {
+  fun getAccounts() {
     ui {
       this@HomeViewModel.currentSavedAccount.value = async { this@HomeViewModel.getCurrentSavedAccountUseCase.execute() }.await()
       this@HomeViewModel.savedAccounts.value = async { this@HomeViewModel.getSavedAccountsUseCase.execute() }.await()

@@ -12,11 +12,14 @@
     tools:layout="@layout/fragment_home">
     <action
       android:id="@+id/action_mainFragment_to_loginFragment"
+      app:clearTask="true"
       app:destination="@id/login_fragment"
       app:enterAnim="?android:fragmentOpenEnterAnimation"
       app:exitAnim="?android:fragmentOpenEnterAnimation"
+      app:launchSingleTop="true"
       app:popEnterAnim="?android:fragmentOpenEnterAnimation"
-      app:popExitAnim="?android:fragmentOpenEnterAnimation" />
+      app:popExitAnim="?android:fragmentOpenEnterAnimation"
+      app:popUpToInclusive="false" />
     <action
       android:id="@+id/action_mainFragment_self"
       app:destination="@id/mainFragment" />
@@ -28,8 +31,8 @@
       app:popExitAnim="@anim/slide_to_bottom"
       app:popUpToInclusive="false" />
     <action
-      android:id="@+id/action_mainFragment_to_mediaImagesFragment"
-      app:destination="@id/mediaImagesFragment"
+      android:id="@+id/action_mainFragment_to_imageMediaAttachmentsFragment"
+      app:destination="@+id/imageMediaAttachmentsFragment"
       app:enterAnim="@anim/fade_in"
       app:exitAnim="@anim/fade_out"
       app:popEnterAnim="@anim/fade_in"
@@ -38,7 +41,7 @@
   <fragment
     android:id="@+id/login_fragment"
     android:name="com.tomoyashibata.shibadoon.ui.login.LoginFragment"
-    android:label="fragment_login"
+    android:label="ログイン"
     tools:layout="@layout/fragment_login">
     <action
       android:id="@+id/action_loginFragment_to_mainFragment"
@@ -54,7 +57,7 @@
     android:label="トゥート作成"
     tools:layout="@layout/fragment_create_toot" />
   <fragment
-    android:id="@+id/mediaImagesFragment"
+    android:id="@+id/imageMediaAttachmentsFragment"
     android:name="com.tomoyashibata.shibadoon.ui.mediaimages.ImageMediaAttachmentsFragment"
     android:label="画像"
     tools:layout="@layout/fragment_image_media_attachments">

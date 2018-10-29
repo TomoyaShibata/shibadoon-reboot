@@ -13,12 +13,11 @@
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:context=".LoginFragment">
 
     <Button
-      android:id="@+id/button"
-      android:layout_width="wrap_content"
+      android:id="@+id/login_button"
+      android:layout_width="300dp"
       android:layout_height="wrap_content"
       android:layout_marginStart="8dp"
       android:layout_marginTop="8dp"
@@ -26,28 +25,39 @@
       android:layout_marginBottom="8dp"
       android:onClick="@{()->viewModel.onLoginClick()}"
       android:text="@string/login_button_text"
+      android:theme="@style/LoginButtonTheme"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.5"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/editText" />
+      app:layout_constraintTop_toBottomOf="@+id/login_instance_edit_text" />
 
     <EditText
-      android:id="@+id/editText"
-      android:layout_width="wrap_content"
-      android:layout_height="47dp"
-      android:layout_marginStart="8dp"
+      android:id="@+id/login_instance_edit_text"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
       android:layout_marginTop="8dp"
-      android:layout_marginEnd="8dp"
-      android:ems="10"
       android:hint="@string/login_instance_edit_hint"
-      android:inputType="textPersonName"
+      android:inputType="textUri"
       android:text="@={viewModel.instance}"
-      app:layout_constraintBottom_toTopOf="@+id/button"
-      app:layout_constraintEnd_toEndOf="parent"
+      android:textColor="@android:color/white"
+      android:theme="@style/LoginEditTextTheme"
+      app:layout_constraintBottom_toTopOf="@+id/login_button"
+      app:layout_constraintEnd_toEndOf="@+id/login_button"
       app:layout_constraintHorizontal_bias="0.5"
-      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/login_instance_prefix_text"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+      android:id="@+id/login_instance_prefix_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/login_instance_prefix_text"
+      android:textColor="@android:color/white"
+      android:textSize="18sp"
+      app:layout_constraintBaseline_toBaselineOf="@+id/login_instance_edit_text"
+      app:layout_constraintEnd_toStartOf="@+id/login_instance_edit_text"
+      app:layout_constraintHorizontal_chainStyle="spread"
+      app:layout_constraintStart_toStartOf="@+id/login_button" />
   </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
