@@ -44,7 +44,7 @@ class HomeTimelineFragment : BaseFragment() {
       it.onChangedFavouriteEvent.observe(this, Observer { this.startAnimationRotationButton(it) })
     }
 
-    this.viewModel.onClickMediaAttachmentThumbEvent.observe(this, Observer { it?.let { (urls, position) -> this.intNav(urls, position) } })
+    this.viewModel.onClickMediaAttachmentThumbEvent.observe(this, Observer { it?.let { (urls, position) -> this.navigateToMediaImageAttachmentsFragment(urls, position) } })
   }
 
   private lateinit var homeTimelineController: HomeTimelineController
@@ -70,8 +70,8 @@ class HomeTimelineFragment : BaseFragment() {
     this.homeTimelineController.requestModelBuild()
   }
 
-  private fun intNav(urls: List<String>, position: Int) {
-    val action = HomeFragmentDirections.ActionMainFragmentToMediaImagesFragment()
+  private fun navigateToMediaImageAttachmentsFragment(urls: List<String>, position: Int) {
+    val action = HomeFragmentDirections.ActionMainFragmentToImageMediaAttachmentsFragment()
       .setUrls(urls.joinToString(","))
       .setFirstViewPosition(position)
     this.findNavController().navigate(action)
