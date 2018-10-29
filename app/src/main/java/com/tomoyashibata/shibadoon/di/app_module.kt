@@ -16,6 +16,7 @@ import com.tomoyashibata.shibadoon.ui.login.LoginViewModel
 import com.tomoyashibata.shibadoon.ui.notifications.NotificationsViewModel
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Request
 import okhttp3.Response
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.ext.koin.viewModel
@@ -42,6 +43,7 @@ val useCaseModule = module {
   single { GetAccountsUseCase(get()) }
   single { GetCurrentSavedAccountUseCase(get(), get()) }
   single { GetSavedAccountsUseCase(get(), get()) }
+  single { GetStreamingUserRequestUseCase(get()) }
   single { GetTokenUseCase(get(), get()) }
   single { HasSavedTokenUseCase(get()) }
   single { LoginUseCase(get()) }
@@ -111,6 +113,14 @@ val networkModule = module {
           addInterceptor(AuthenticationInterceptor(currentSavedAccessToken.accessToken))
         }.build())
       }.build().create(MastodonApi::class.java)
+  }
+
+  factory("streamingUser") {
+    val currentSavedAccessToken = get<SavedAccessTokenRepository>().getCurrentSavedAccessToken()
+    Request.Builder()
+      .header("Authorization", "Bearer ${currentSavedAccessToken.accessToken}")
+      .url("https://${currentSavedAccessToken.instance}/api/v1/streaming/user")
+      .build()
   }
 }
 
