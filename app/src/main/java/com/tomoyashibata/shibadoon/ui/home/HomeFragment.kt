@@ -41,16 +41,14 @@ class HomeFragment : BaseFragment() {
   }
 
   override fun subscribeToNavigationChanges() {
-    this.viewModel.apply {
-      onRequestNavigateToLoginFragmentEvent.observe(this@HomeFragment, Observer { this@HomeFragment.navigateToLoginFragment() })
-      enabledSavedTokenEvent.observe(this@HomeFragment, Observer {
-        this@HomeFragment.setupDrawer()
-        this@HomeFragment.setupViewPager()
-      })
-      postGetAccountsEvent.observe(this@HomeFragment, Observer { this@HomeFragment.setupDrawerAccountHeader() })
-      postChangeAccountEvent.observe(this@HomeFragment, Observer { this@HomeFragment.navigateToMainFragment() })
-      onClickCreateTootEvent.observe(this@HomeFragment, Observer { this@HomeFragment.navigateToCreateTootFragment() })
-    }
+    this.viewModel.onRequestNavigateToLoginFragmentEvent.observe(this, Observer { this.navigateToLoginFragment() })
+    this.viewModel.enabledSavedTokenEvent.observe(this, Observer {
+      this.setupDrawer()
+      this.setupViewPager()
+    })
+    this.viewModel.postGetAccountsEvent.observe(this, Observer { this.setupDrawerAccountHeader() })
+    this.viewModel.postChangeAccountEvent.observe(this, Observer { this.navigateToMainFragment() })
+    this.viewModel.onClickCreateTootEvent.observe(this, Observer { this.navigateToCreateTootFragment() })
   }
 
   private fun setupDrawerAccountHeader() {
